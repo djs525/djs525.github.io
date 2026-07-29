@@ -1,0 +1,122 @@
+/* Stat strip — a different shape from the cards below it, so the screen
+   doesn't read as one repeated grid. */
+.tally {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+
+.tallyCell {
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: var(--s3);
+  text-align: center;
+}
+
+.tallyValue {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  line-height: 1;
+  color: var(--ink);
+}
+
+.tallyLabel {
+  display: block;
+  margin-top: var(--s1);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--ink-soft);
+}
+
+.list {
+  display: grid;
+  gap: var(--s3);
+}
+
+/* Achievements are rows, not cards — a trophy case reads as a list. */
+.row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s3);
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  border-left-width: 10px;
+  box-shadow: var(--shadow-1);
+  padding: var(--s3);
+  opacity: 0;
+  transform: translateX(-14px);
+  transition:
+    opacity var(--t-mid) var(--ease-glide),
+    transform var(--t-mid) var(--ease-settle),
+    box-shadow var(--t-fast) var(--ease-glide);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.row:hover {
+  box-shadow: var(--shadow-2);
+}
+
+.GOLD {
+  border-left-color: var(--gold);
+}
+.SILVER {
+  border-left-color: #b9c3d6;
+}
+.HONOR {
+  border-left-color: var(--cyan);
+}
+
+.medal {
+  flex: none;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  line-height: 1.15;
+}
+
+.detail {
+  margin-top: var(--s1);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.when {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .when {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .row {
+    transition: none;
+  }
+}

@@ -1,0 +1,42 @@
+.page {
+  position: relative;
+  z-index: 1; /* above the arena bands */
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--s5) var(--s4) var(--s6);
+}
+
+/* A section banner: small label type never sits directly on the sky. */
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin: var(--s5) 0 var(--s4);
+  background: var(--ink);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-alt);
+  padding: var(--s2) var(--s3);
+}
+
+.bannerTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  color: var(--panel);
+}
+
+.bannerCount {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--gold);
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding: var(--s4) var(--s3) var(--s5);
+  }
+}

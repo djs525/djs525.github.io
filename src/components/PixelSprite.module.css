@@ -1,0 +1,27 @@
+.window {
+  overflow: hidden;
+  line-height: 0;
+}
+
+/* The classic sprite-strip technique: every frame sits side by side in one SVG
+   and the strip steps across the window. -100% is the strip's own width, so
+   steps(n) lands exactly on frame boundaries. No JS, no timers, GPU-composited.
+   Duration and step count arrive as inline styles, per sprite. */
+.strip {
+  animation-name: play;
+  animation-duration: var(--sprite-cycle, 2s);
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@keyframes play {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip {
+    animation: none;
+  }
+}

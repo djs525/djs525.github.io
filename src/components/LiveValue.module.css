@@ -1,0 +1,13 @@
+/* This colour means: the value genuinely arrived from the API this session.
+   Nothing decorative is allowed to use it. */
+.live {
+  color: var(--live);
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+
+.absent {
+  color: var(--ink-soft);
+  font-family: var(--font-ui);
+  font-weight: 700;
+}

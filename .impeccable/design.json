@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-28T00:00:00.000Z",
+  "title": "Design System: Dev Shah — Roster",
+  "extensions": {
+    "colorMeta": {
+      "sky": {
+        "role": "primary",
+        "displayName": "Arena Sky",
+        "canonical": "#2f6ff2",
+        "tonalRamp": [
+          "#0a1b45",
+          "#123182",
+          "#1c46b0",
+          "#2f6ff2",
+          "#5a8ff5",
+          "#8bb1f8",
+          "#bcd3fb",
+          "#e6eefe"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Achievement Gold",
+        "canonical": "#ffc93c",
+        "tonalRamp": [
+          "#3d2c00",
+          "#665000",
+          "#997800",
+          "#cca200",
+          "#ffc93c",
+          "#ffd970",
+          "#ffe9a8",
+          "#fff6d9"
+        ]
+      },
+      "magenta": {
+        "role": "secondary",
+        "displayName": "Interface Magenta",
+        "canonical": "#ff4d8d",
+        "tonalRamp": [
+          "#3d0a1f",
+          "#661234",
+          "#991b4e",
+          "#cc2468",
+          "#ff4d8d",
+          "#ff81ad",
+          "#ffb3ce",
+          "#ffe0eb"
+        ]
+      },
+      "cyan": {
+        "role": "secondary",
+        "displayName": "Data Cyan",
+        "canonical": "#35d6f5",
+        "tonalRamp": [
+          "#052b33",
+          "#0a4a58",
+          "#0f6f83",
+          "#1494ae",
+          "#35d6f5",
+          "#75e4f8",
+          "#aeeffb",
+          "#dcf9fd"
+        ]
+      },
+      "green": {
+        "role": "secondary",
+        "displayName": "Product Green",
+        "canonical": "#43dd80",
+        "tonalRamp": [
+          "#062d16",
+          "#0b4d26",
+          "#11723a",
+          "#17974d",
+          "#43dd80",
+          "#7ae8a6",
+          "#aff2c8",
+          "#dcfbe7"
+        ]
+      },
+      "live": {
+        "role": "tertiary",
+        "displayName": "Live Green",
+        "canonical": "#0d7a5f",
+        "tonalRamp": [
+          "#02201a",
+          "#04382c",
+          "#075243",
+          "#0a6650",
+          "#0d7a5f",
+          "#149a79",
+          "#3fc4a1",
+          "#a8e8d7"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "#fffaf0",
+        "tonalRamp": [
+          "#3a352b",
+          "#5c5648",
+          "#867e6c",
+          "#b0a693",
+          "#c8b48c",
+          "#e2d6bd",
+          "#f0e6d2",
+          "#fffaf0"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#14203d",
+        "tonalRamp": [
+          "#080d1a",
+          "#14203d",
+          "#22335c",
+          "#33477a",
+          "#4a5a80",
+          "#7a87a5",
+          "#adb6c9",
+          "#dfe3ec"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Player Name", "purpose": "The player name. Once per page." },
+      "headline": { "displayName": "Unit Name", "purpose": "Unit names and section titles." },
+      "body": {
+        "displayName": "Prose",
+        "purpose": "All readable text. Never set in the pixel face."
+      },
+      "label": {
+        "displayName": "Shouting Label",
+        "purpose": "Badges, stat keys, section markers, buttons."
+      }
+    },
+    "shadows": [
+      {
+        "name": "panel-drop",
+        "value": "8px 8px 0 0 #123182",
+        "purpose": "Panels and cards at rest. Zero blur, always Sky Far."
+      },
+      {
+        "name": "panel-lift",
+        "value": "12px 12px 0 0 #123182",
+        "purpose": "Card on hover, paired with translateY(-4px)."
+      },
+      {
+        "name": "button-seat",
+        "value": "4px 4px 0 0",
+        "purpose": "Buttons at rest — Ink under gold, Gold under ink."
+      },
+      {
+        "name": "button-press",
+        "value": "7px 7px 0 0",
+        "purpose": "Button lifting out of its seat on hover."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.34, 1.32, 0.48, 1)",
+        "purpose": "Spring settle for anything arriving or lifting."
+      },
+      {
+        "name": "ease-glide",
+        "value": "cubic-bezier(0.33, 0, 0.15, 1)",
+        "purpose": "Opacity and colour transitions."
+      },
+      { "name": "t-fast", "value": "180ms", "purpose": "Hover and press feedback." },
+      { "name": "t-mid", "value": "420ms", "purpose": "Cards settling into the roster." },
+      { "name": "t-slow", "value": "900ms", "purpose": "Idle sprite bob." }
+    ],
+    "breakpoints": [{ "name": "narrow", "value": "720px" }]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action on the profile plate.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">EMAIL DEV</a>",
+      "css": ".ds-btn-primary { display: inline-block; font-family: 'Silkscreen', monospace; font-size: 0.7rem; text-decoration: none; background: #ffc93c; color: #14203d; border: 4px solid #14203d; border-radius: 0; padding: 16px 24px; box-shadow: 4px 4px 0 0 #14203d; transition: transform 180ms cubic-bezier(0.34,1.32,0.48,1), box-shadow 180ms cubic-bezier(0.33,0,0.15,1); } .ds-btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 #14203d; } .ds-btn-primary:focus-visible { outline: 4px solid #ffc93c; outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Repo link in a unit card footer.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">OPEN REPO</a>",
+      "css": ".ds-btn-secondary { font-family: 'Silkscreen', monospace; font-size: 0.55rem; text-decoration: none; background: #14203d; color: #fffaf0; border: 4px solid #14203d; border-radius: 0; padding: 8px 16px; box-shadow: 4px 4px 0 0 #ffc93c; transition: transform 180ms cubic-bezier(0.34,1.32,0.48,1), box-shadow 180ms cubic-bezier(0.33,0,0.15,1); } .ds-btn-secondary:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 0 #ffc93c; }"
+    },
+    {
+      "name": "Type Badge (active)",
+      "kind": "chip",
+      "refersTo": "badge-data",
+      "description": "A discipline that applies to this unit.",
+      "html": "<span class=\"ds-badge\">DATA</span>",
+      "css": ".ds-badge { font-family: 'Silkscreen', monospace; font-size: 0.5rem; letter-spacing: 0.04em; padding: 3px 4px; border: 2px solid #14203d; border-radius: 0; background: #35d6f5; color: #14203d; }"
+    },
+    {
+      "name": "Type Badge (inapplicable)",
+      "kind": "chip",
+      "refersTo": "badge-off",
+      "description": "Shown greyed rather than hidden — absence is information.",
+      "html": "<span class=\"ds-badge-off\">INTERFACE</span>",
+      "css": ".ds-badge-off { font-family: 'Silkscreen', monospace; font-size: 0.5rem; letter-spacing: 0.04em; padding: 3px 4px; border: 2px solid #c8b48c; border-radius: 0; background: #f0e6d2; color: #4a5a80; }"
+    },
+    {
+      "name": "Unit Card",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "One project as a roster unit.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-name\">BRAWLBOT</h3><p class=\"ds-card-body\">A Discord bot answering natural-language questions from live API data.</p></article>",
+      "css": ".ds-card { background: #fffaf0; border: 4px solid #14203d; border-radius: 0; box-shadow: 8px 8px 0 0 #123182; padding: 24px; transition: transform 180ms cubic-bezier(0.34,1.32,0.48,1), box-shadow 180ms cubic-bezier(0.33,0,0.15,1); } .ds-card:hover { transform: translateY(-4px); box-shadow: 12px 12px 0 0 #123182; } .ds-card-name { font-family: 'Silkscreen', monospace; font-size: 1.4rem; margin: 0 0 8px; color: #14203d; } .ds-card-body { font-family: 'Baloo 2', system-ui, sans-serif; font-weight: 500; font-size: 1.05rem; line-height: 1.5; margin: 0; color: #14203d; }"
+    },
+    {
+      "name": "Recessed Build Row",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "One stratum a unit was built from.",
+      "html": "<div class=\"ds-build-row\"><span class=\"ds-build-role\">SERVICE</span><span>Plugin registry, model-fallback chain</span></div>",
+      "css": ".ds-build-row { display: grid; grid-template-columns: 5.5rem 1fr; gap: 8px; align-items: baseline; background: #f0e6d2; border-left: 4px solid #14203d; padding: 4px 8px; font-family: 'Baloo 2', system-ui, sans-serif; font-size: 0.9rem; color: #14203d; } .ds-build-role { font-family: 'Silkscreen', monospace; font-size: 0.5rem; letter-spacing: 0.04em; color: #4a5a80; }"
+    },
+    {
+      "name": "Live Value",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "A number from the API, or its honest absence.",
+      "html": "<span class=\"ds-live\">412</span> <span class=\"ds-absent\">NO DATA</span>",
+      "css": ".ds-live { font-family: 'Silkscreen', monospace; color: #0d7a5f; } .ds-absent { font-family: 'Silkscreen', monospace; color: #4a5a80; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Roster Screen",
+    "overview": "This is the character-select screen of a game the visitor already knows how to read. The roster format is the actual information architecture: Dev is the player, each project is a unit with a portrait, a type, the parts it was built from, and a log. The register is bright and saturated, grounded on a lit arena sky rather than a dark void, with warm panels casting hard unblurred shadows. Everything is built from a 4px pixel unit, which is what keeps a playful world from reading as sloppy.",
+    "keyCharacteristics": [
+      "Lit arena sky, never a dark void",
+      "Warm panels with 4px ink outlines and hard, unblurred offset shadows",
+      "Every measurement a multiple of the 4px pixel unit",
+      "Hand-authored 16×16 sprites, never icon-font glyphs or clipart",
+      "Pixel display face over a rounded UI face — labels shout, prose reads",
+      "Type badges carry classification as real information, not decoration",
+      "Motion settles on a spring; nothing snaps"
+    ],
+    "rules": [
+      {
+        "name": "The One Meaning Rule",
+        "body": "Every signal colour carries exactly one meaning: gold is action and achievement, magenta/cyan/green are the three types, live green is API-sourced data.",
+        "section": "colors"
+      },
+      {
+        "name": "The Live Value Rule",
+        "body": "Live Green appears only on a value fetched this session. When the API is unavailable the slot reads NO DATA in Ink Soft. There is deliberately no hardcoded fallback.",
+        "section": "colors"
+      },
+      {
+        "name": "The Daylight Rule",
+        "body": "The ground stays a lit sky. Near-black grounds, neon-on-black, and CRT glow are permanently out.",
+        "section": "colors"
+      },
+      {
+        "name": "The Small Text Off Sky Rule",
+        "body": "White on Arena Sky measures 4.49:1 — large display type only. Any text below 24px must sit on a panel.",
+        "section": "colors"
+      },
+      {
+        "name": "The Prose Reads Rule",
+        "body": "Silkscreen never sets a sentence. Anything longer than four words is Baloo 2.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Blur Rule",
+        "body": "Every shadow has zero blur radius and zero spread. A blurred shadow instantly reads as a generic web card.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Shadow Is The Ground Rule",
+        "body": "Panel shadows are always Sky Far, so panels look lit by the same scene.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Authored Sprite Rule",
+        "body": "Every pictorial element is a hand-authored pixel grid. No icon fonts, no clipart.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do keep every dimension a multiple of the 4px pixel unit.",
+      "Do author new sprites by hand as pixel grids in src/data/sprites.ts.",
+      "Do use hard, zero-blur shadows in Sky Far for every raised surface.",
+      "Do show inapplicable type badges greyed rather than hiding them — absence is information.",
+      "Do set all prose in Baloo 2 and all labels in Silkscreen.",
+      "Do render NO DATA in Ink Soft whenever the API has not supplied a value.",
+      "Do put small text on a panel, never directly on the sky."
+    ],
+    "donts": [
+      "Don't use border-radius, blurred shadows, or gradients on any component surface.",
+      "Don't set a sentence in Silkscreen.",
+      "Don't add CRT scanlines, screen curvature, glow, or any other retro-arcade costume.",
+      "Don't go dark-mode-with-neon. The ground is a lit sky.",
+      "Don't reuse a signal colour for a second meaning.",
+      "Don't substitute an icon font or clipart where a sprite belongs.",
+      "Don't invent a live value when the API is unavailable."
+    ]
+  }
+}

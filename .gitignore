@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+.vite/
+
+# Impeccable local settings and decision-page session state
+.claude/settings.local.json
+.impeccable/questions/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Personal documents — this repo is published to djs525.github.io.
+# The transcript carries a student number; every resume carries a phone
+# number and home city. Nothing here should enter public git history.
+*.pdf

@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dev Shah — Drawing Sheets</title>
+    <script>
+      // GitHub Pages serves this file for any unknown path, before the app
+      // bundle exists. Stash the requested route, then hand control to the SPA
+      // at '/', which replays it. Keeps real URLs instead of hash routing.
+      sessionStorage.setItem('redirect-path', location.pathname + location.search + location.hash);
+      location.replace('/');
+    </script>
+  </head>
+  <body></body>
+</html>

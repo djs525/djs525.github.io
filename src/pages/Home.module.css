@@ -1,0 +1,127 @@
+.profile {
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: var(--s5) var(--s4);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--s5);
+  align-items: center;
+}
+
+.avatar {
+  background: var(--sky);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2);
+  display: grid;
+  place-items: center;
+  animation: idle 2.4s var(--ease-glide) infinite alternate;
+}
+
+@keyframes idle {
+  to {
+    transform: translateY(-6px);
+  }
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.blurb {
+  margin-top: var(--s3);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.specRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin-top: var(--s4);
+}
+
+.chip {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  background: var(--panel-sunk);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 3px var(--s2);
+}
+
+.chipGold {
+  background: var(--gold);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin-top: var(--s4);
+}
+
+.primary {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s3) var(--s4);
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--t-fast) var(--ease-settle),
+    box-shadow var(--t-fast) var(--ease-glide);
+}
+
+.primary:hover {
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* The focus ring must not vanish into the button it rings. */
+.primary:focus-visible {
+  outline-color: var(--ink);
+}
+
+.roster {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--s5);
+}
+
+@media (max-width: 720px) {
+  .profile {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: var(--s4);
+    padding: var(--s4) var(--s3);
+  }
+
+  .roster {
+    grid-template-columns: 1fr;
+    gap: var(--s4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar {
+    animation: none;
+  }
+  .primary {
+    transition: none;
+  }
+}

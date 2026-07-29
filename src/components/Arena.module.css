@@ -1,0 +1,75 @@
+.arena {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.layer {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+}
+
+.far {
+  top: 8%;
+  opacity: 0.35;
+}
+
+.mid {
+  top: 26%;
+  opacity: 0.5;
+}
+
+.near {
+  bottom: -2%;
+  opacity: 0.75;
+}
+
+/*
+ * Scroll-driven parallax: each band travels at its own rate as the document
+ * scrolls, so the arena has depth. CSS-only — no scroll listener, no JS frame
+ * budget. Where `scroll()` timelines are unsupported the bands simply sit
+ * still, which is a perfectly good static scene.
+ */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .far,
+    .mid,
+    .near {
+      animation-timeline: scroll(root block);
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    }
+
+    .far {
+      animation-name: driftFar;
+    }
+    .mid {
+      animation-name: driftMid;
+    }
+    .near {
+      animation-name: driftNear;
+    }
+  }
+}
+
+@keyframes driftFar {
+  to {
+    transform: translate3d(-4%, -6vh, 0);
+  }
+}
+
+@keyframes driftMid {
+  to {
+    transform: translate3d(6%, -18vh, 0);
+  }
+}
+
+@keyframes driftNear {
+  to {
+    transform: translate3d(-8%, 10vh, 0);
+  }
+}

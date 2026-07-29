@@ -1,0 +1,78 @@
+/**
+ * ARCADE — the committed world. See DESIGN.md.
+ * Hard shadows, square corners, lit arena sky.
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@500;600;700;800&display=swap");
+
+:root {
+  /* --- Ground -------------------------------------------------------- */
+  --sky: #2f6ff2;
+  --sky-deep: #1c46b0;
+  --sky-far: #123182;
+  --page-bg: radial-gradient(
+    120% 80% at 50% -10%,
+    var(--sky) 0%,
+    var(--sky-deep) 45%,
+    var(--sky-far) 100%
+  );
+
+  /* --- Surfaces ------------------------------------------------------- */
+  --panel: #fffaf0;
+  --panel-sunk: #f0e6d2;
+  --panel-edge: #c8b48c;
+
+  /* --- Ink ------------------------------------------------------------ */
+  --ink: #14203d;
+  --ink-soft: #4a5a80;
+  --on-sky: #ffffff;
+
+  /* --- Signal colours -------------------------------------------------- */
+  --gold: #ffc93c;
+  --magenta: #ff4d8d;
+  --cyan: #35d6f5;
+  --green: #43dd80;
+  --live: #0d7a5f;
+  --accent: var(--gold);
+  --on-accent: var(--ink);
+
+  /* --- Form ------------------------------------------------------------ */
+  --px: 4px; /* sprite grid unit */
+  --edge: 3px;
+  --edge-thin: 2px;
+  --radius: 0;
+  --radius-sm: 0;
+
+  /* --- Depth: flat offsets, never blurred ------------------------------ */
+  --shadow-1: 6px 6px 0 0 var(--sky-far);
+  --shadow-2: 10px 10px 0 0 var(--sky-far);
+  --shadow-btn: 4px 4px 0 0 var(--ink);
+  --shadow-btn-hover: 7px 7px 0 0 var(--ink);
+  --shadow-alt: 4px 4px 0 0 var(--gold);
+  --shadow-alt-hover: 6px 6px 0 0 var(--gold);
+  --lift: -4px;
+  --lift-x: -2px;
+
+  /* --- Spacing --------------------------------------------------------- */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 40px;
+  --s6: 64px;
+
+  /* --- Type ------------------------------------------------------------ */
+  --font-display: "Lilita One", ui-rounded, system-ui, sans-serif;
+  --font-ui: "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: 0.01em;
+  --label-tracking: 0.06em;
+  --label-transform: uppercase;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease-settle: cubic-bezier(0.34, 1.32, 0.48, 1);
+  --ease-glide: cubic-bezier(0.33, 0, 0.15, 1);
+  --t-fast: 180ms;
+  --t-mid: 420ms;
+  --t-slow: 900ms;
+}

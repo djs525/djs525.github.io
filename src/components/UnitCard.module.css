@@ -1,0 +1,186 @@
+.card {
+  position: relative;
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  /* Hard offset, never blurred — this world casts flat shadows. */
+  box-shadow: var(--shadow-1);
+  padding: var(--s4);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity var(--t-mid) var(--ease-glide),
+    transform var(--t-mid) var(--ease-settle),
+    box-shadow var(--t-fast) var(--ease-glide);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-2);
+  transform: translateY(var(--lift));
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  border-bottom: var(--edge) solid var(--ink);
+  padding-bottom: var(--s3);
+  margin-bottom: var(--s3);
+}
+
+.portrait {
+  flex: none;
+  background: var(--panel-sunk);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2);
+  display: grid;
+  place-items: center;
+}
+
+/* The unit wakes up when you look at it: the idle loop runs roughly three
+   times faster while its card is hovered. */
+.card:hover .portrait {
+  --sprite-cycle: 0.55s;
+}
+
+.identity {
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.8vw, 1.75rem);
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+  margin-top: var(--s2);
+}
+
+.badge {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  padding: 2px var(--s2);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+
+.badgeINTERFACE {
+  background: var(--magenta);
+}
+.badgeDATA {
+  background: var(--cyan);
+}
+.badgePRODUCT {
+  background: var(--green);
+}
+
+.badgeOff {
+  background: var(--panel-sunk);
+  color: var(--ink-soft);
+  border-color: var(--panel-edge);
+}
+
+.stack {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  background: var(--panel-sunk);
+  border-left: var(--edge) solid var(--ink);
+  padding: var(--s2);
+  margin-bottom: var(--s4);
+}
+
+.log {
+  display: grid;
+  gap: var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.logEntry {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.logKey {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  color: var(--ink);
+  background: var(--gold);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 1px var(--s1);
+  margin-right: var(--s2);
+  white-space: nowrap;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  border-top: var(--edge) solid var(--ink);
+  padding-top: var(--s3);
+  margin-top: auto;
+}
+
+.stat {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--ink-soft);
+}
+
+.statValue {
+  margin-left: var(--s2);
+}
+
+.open {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  box-shadow: var(--shadow-alt);
+  transition:
+    box-shadow var(--t-fast) var(--ease-glide),
+    transform var(--t-fast) var(--ease-settle);
+}
+
+.open:hover {
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-alt-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .open {
+    transition: none;
+  }
+}

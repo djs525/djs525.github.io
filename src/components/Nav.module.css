@@ -1,0 +1,64 @@
+.bar {
+  position: relative;
+  z-index: 2;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: var(--s5) var(--s4) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+}
+
+.tab {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--panel-sunk);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  box-shadow: var(--shadow-btn);
+  transition:
+    transform var(--t-fast) var(--ease-settle),
+    box-shadow var(--t-fast) var(--ease-glide),
+    background var(--t-fast) var(--ease-glide);
+}
+
+.tab:hover {
+  background: var(--panel);
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* The selected tab sits forward, the way a chosen menu item does. */
+.active {
+  background: var(--accent);
+  color: var(--on-accent);
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-alt-hover);
+}
+
+.active:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .bar {
+    padding: var(--s4) var(--s3) 0;
+  }
+
+  .tab {
+    font-size: 0.75rem;
+    padding: var(--s2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab {
+    transition: none;
+  }
+}
