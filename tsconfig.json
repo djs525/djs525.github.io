@@ -22,7 +22,7 @@
     "exactOptionalPropertyTypes": true,
 
     "baseUrl": ".",
-    "paths": { "@theme": ["src/themes/arcade.css"] }
+    "paths": { "@theme": ["src/themes/index.css"] }
   },
   "include": ["src", "vite.config.ts"]
 }

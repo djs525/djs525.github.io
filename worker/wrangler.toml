@@ -1,0 +1,11 @@
+name = "djs525-api"
+main = "src/index.ts"
+compatibility_date = "2026-08-01"
+
+# The site origin, plus the two local ports the site runs on.
+# Anything not listed here receives no CORS headers at all.
+[vars]
+ALLOWED_ORIGINS = "https://djs525.github.io,http://localhost:5173,http://localhost:4173"
+
+# GITHUB_TOKEN is a secret, never a var:
+#   wrangler secret put GITHUB_TOKEN

@@ -11,9 +11,12 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Every push to main republishes the site.
+  # Every push to main republishes the site. Worker-only changes do not touch
+  # the built site, so they do not trigger a redeploy.
   push:
     branches: [main]
+    paths-ignore:
+      - "worker/**"
   # And a manual "Run workflow" button, for redeploying without a code change.
   workflow_dispatch:
 
@@ -55,6 +58,12 @@ jobs:
       # error fails the deploy instead of shipping a broken site.
       - name: Build
         run: npm run build
+        env:
+          # Where the stats Worker lives. Set as a repository variable, not a
+          # secret: it is a public URL that ships in the bundle either way.
+          # Unset, every repository panel renders "Not available", which is a
+          # complete state rather than a broken one.
+          VITE_API_BASE: ${{ vars.VITE_API_BASE }}
 
       - name: Upload dist/ as the Pages artifact
         uses: actions/upload-pages-artifact@v3

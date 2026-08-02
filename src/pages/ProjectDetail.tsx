@@ -149,7 +149,7 @@ export default function ProjectDetail() {
         </>
       ) : null}
 
-      <Banner title="TELEMETRY" count="Live from GitHub" />
+      <Banner title="SERVICE RECORD" count="Pulled from GitHub" />
 
       <div className={styles.telemetry}>
         <div className={styles.stats}>
@@ -161,9 +161,9 @@ export default function ProjectDetail() {
           </div>
 
           <div className={styles.stat}>
-            <span className={styles.statLabel}>Last push</span>
+            <span className={styles.statLabel}>Active period</span>
             <span className={styles.statValue}>
-              <LiveValue stats={stats} select={(d) => d.lastPush} />
+              <LiveValue stats={stats} select={(d) => d.activePeriod} />
             </span>
           </div>
 

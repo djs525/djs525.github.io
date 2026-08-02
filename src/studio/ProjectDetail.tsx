@@ -140,7 +140,7 @@ export default function ProjectDetail() {
       ) : null}
 
       <section className={styles.section}>
-        <SectionHeading title="Activity" meta="Live from GitHub" />
+        <SectionHeading title="Repository" meta="Fetched from GitHub" />
 
         <StatGrid
           items={[
@@ -151,8 +151,8 @@ export default function ProjectDetail() {
               ),
             },
             {
-              label: "Last push",
-              value: <LiveValue stats={stats} select={(d) => d.lastPush} />,
+              label: "Active period",
+              value: <LiveValue stats={stats} select={(d) => d.activePeriod} />,
             },
             {
               label: "Languages",

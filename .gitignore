@@ -21,3 +21,8 @@ dist/
 # site and does not belong in a repo recruiters open.
 learning/
 src/**/exercise-*
+
+# Worker: local build state and local secrets. node_modules/ above already
+# covers worker/node_modules at any depth.
+worker/.wrangler/
+worker/.dev.vars

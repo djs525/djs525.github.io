@@ -1,6 +1,6 @@
 ---
 name: Dev Shah — Studio
-description: A quiet, warm-neutral product surface where the only color on the page is data that is true right now.
+description: A quiet, warm-neutral product surface where the only color on the page is a number that came from the API rather than from the author.
 worlds:
   default: studio
   optional: arcade
@@ -182,14 +182,18 @@ Restrained: warm neutrals plus one accent.
 - **Text 3** (`#756d64`): labels and metadata. 4.9:1 on ground — the floor, and nothing may be set lighter.
 
 ### Accent
-- **Live** (`#0f6b52`): a value that genuinely arrived from the API this session, and its status dot. 6.4:1 on surface.
+- **Live** (`#0f6b52`): a value that genuinely arrived from the API during this visit, and its status dot. 6.4:1 on surface.
 - **Live Wash** (`#eaf4f0`): the fill behind a live value chip. Used nowhere else.
 
 ### Named Rules
 
 **The Only Color Rule.** Live green is the only hue in the studio world. No brand blue, no category tinting, no status palette, no colored discipline tags. If a second color appears, either the system has broken or a genuinely new meaning was added — and there is only one meaning available.
 
-**The Live Value Rule.** (Carried over unchanged; it outranks visual preference.) The live color appears only on a value fetched this session. When the API is unavailable the slot reads `Not available` in Text 3, in the body face, with no dot. There is deliberately no hardcoded fallback — a stale number dressed as a live one is the exact failure this site exists to avoid.
+**The Fetched Value Rule.** (Outranks visual preference.) The accent marks **provenance, not freshness**: this number came from the API during the visit, rather than from a string typed into `src/data`. Every other figure on the site is Dev's word; these are not, and the colour is what says so.
+
+It follows that the figures behind it must be cumulative. Commit count, build window and language breakdown do not decay, so a project finished last year reports exactly what it always will. Recency is deliberately not among them: a completed project is not a failing one, and rendering "last pushed 8 months ago" in the one accent colour would spend the page's loudest signal on its weakest fact.
+
+When the API has not answered, the slot reads `Not available` in Text 3, in the body face, with no dot and no chip. There is deliberately no hardcoded fallback: a stale number dressed as a fetched one is the exact failure this rule exists to prevent.
 
 **The Warm Neutral Rule.** Every neutral carries the same warm cast (hue ≈ 35°). A pure-gray `#f5f5f5` or `#888` dropped into this system reads instantly as a foreign part.
 
@@ -269,7 +273,9 @@ Icons belong to studio. Arcade's rule is unchanged: every pictorial element ther
 Surface 2 fill, Text 2 label, 6px radius, 4px/10px. Only applicable disciplines are shown — the studio world states what a project is rather than what it is not.
 
 ### Live value
-The number in Text at body weight, preceded by a 6px Live dot, on a Live Wash chip with 6px radius. Loading renders `Reading…` in Text 3 with no dot; unavailable renders `Not available` in Text 3 with no dot and no chip.
+The number in Text at body weight, preceded by a 6px Live dot, on a Live Wash chip with 6px radius. The dot aligns to the first line rather than the block's centre, because a language list wraps. Loading renders `Reading…` in Text 3 with no dot; unavailable renders `Not available` in Text 3 with no dot and no chip.
+
+The panel carrying them is **Repository · Fetched from GitHub**, and it holds exactly three: commits, active period, languages. Arcade calls the same panel **SERVICE RECORD · Pulled from GitHub**.
 
 ### Stat row
 Label in Text 3, value in Geist Mono at 1.125rem in Text, stacked, laid out in an auto-fit grid with hairline separators between cells. No card per stat, no big-number hero.

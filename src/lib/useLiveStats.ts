@@ -7,14 +7,20 @@ import { useEffect, useState } from "react";
  * GitHub directly, because the unauthenticated API rate-limits by IP and a
  * recruiter's page load must not be the request that runs out of budget.
  *
+ * Every figure it returns is cumulative: a project finished last year reports
+ * the same commit count and the same build window it always will. Recency is
+ * deliberately not among them, because a completed project is not a failing
+ * one. What the reserved colour marks is provenance, not freshness.
+ *
  * Until VITE_API_BASE is configured, every value reports `unavailable` and the
- * UI renders NO DATA. That is the designed resting state, not a bug — see
- * DESIGN.md, The Live Ink Rule.
+ * UI renders "Not available". That is the designed resting state, not a bug.
+ * See DESIGN.md, The Fetched Value Rule.
  */
 
 export interface RepoStats {
   readonly commits: number;
-  readonly lastPush: string;
+  /** The window the work happened in, e.g. "Mar – Jul 2026". */
+  readonly activePeriod: string;
   /** Language name → percentage of bytes, largest first. */
   readonly languages: readonly (readonly [string, number])[];
 }

@@ -13,9 +13,10 @@ The site ships two complete visual worlds and lets the visitor choose.
 
 **Studio** is the default. Warm neutral ground, hairline structure, one grotesk
 used from 12px to 96px, and a signature that writes itself once per tab. It is
-monochrome apart from one reserved green, which appears only on values fetched
-from the GitHub API during that session. The only colour on the page is a claim
-being checked in front of you.
+monochrome apart from one reserved green, which marks the only figures on the
+site that did not come from me: commit count, build window and language
+breakdown, fetched from GitHub during the visit. The colour means provenance,
+not freshness.
 
 **Arcade** is the opt-in second version, reachable from the footer. The same
 four projects as a handheld-game roster screen: a lit arena sky, warm panels
@@ -68,6 +69,7 @@ requested path and hands control to the app at `/`.
 ## Layout
 
 ```
+worker/        the Cloudflare Worker behind those three numbers
 src/
   studio/      the default world: components, pages, CSS modules
   components/  the arcade world's components
@@ -81,12 +83,48 @@ src/
 `DESIGN.md` records the visual system for both worlds. `PRODUCT.md` records who
 the site is for and what it is allowed to claim.
 
+## The Worker
+
+`worker/` is a single Cloudflare Worker serving one route:
+
+```
+GET /stats/:owner/:repo
+-> { commits, activePeriod, languages: [name, percent][] }
+```
+
+No framework, no dependencies at runtime. It queries GitHub with a read-only
+fine-grained token held as a Cloudflare secret, so the token never reaches the
+browser and never enters this repository. Requests are restricted to this
+account's repositories, because an open GitHub proxy is an invitation to spend
+someone else's rate limit. Responses are cached at Cloudflare's edge for
+fifteen minutes.
+
+Every figure it returns is cumulative. Recency is deliberately absent: see the
+rule below.
+
+```bash
+cd worker
+npm install
+npm run dev        # http://localhost:8787
+npm run deploy
+```
+
+The site reads `VITE_API_BASE` at build time. Unset, every repository panel
+renders `Not available`, which is a complete state rather than a broken one.
+
 ## Three rules that hold
 
-**Live data is never faked.** A value styled as live has to have arrived from
-the API this session. When it has not, the slot reads `Not available` in muted
-ink. There is deliberately no hardcoded fallback, because a stale number dressed
-as a live one is the exact failure this site exists to avoid.
+**Fetched data is never faked.** The accent colour marks provenance: this
+number came from GitHub during your visit, not from a string I typed. When the
+API has not answered, the slot reads `Not available` in muted ink. There is
+deliberately no hardcoded fallback, because a stale number dressed as a fetched
+one is the exact failure the rule exists to prevent.
+
+It follows that the figures are cumulative. Commit count, build window and
+languages do not decay, so a finished project reports what it always will.
+Recency is not shown: a completed project is not a failing one, and "last
+pushed 8 months ago" would spend the page's loudest signal on its weakest
+fact.
 
 **The two worlds share no presentation.** A shared component that branches on
 the current theme would be a violation, not a shortcut.
