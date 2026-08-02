@@ -58,6 +58,12 @@ export interface Project {
    */
   readonly hook: string;
   readonly repo: string;
+  /**
+   * A deployed, publicly reachable instance. Optional, and the strongest proof
+   * a project can carry: a recruiter can click it and use the thing. Only set
+   * this when the URL actually resolves — a dead demo link is worse than none.
+   */
+  readonly liveUrl?: string;
   /** Drawing sheet number, in filing order. */
   readonly sheet: string;
   readonly problem: string;
@@ -162,6 +168,7 @@ export const PROJECTS: readonly Project[] = [
     name: "F1 Strategy Lab",
     hook: "Fans argue pit strategy every race with no way to test whether the alternative call would have worked.",
     repo: "djs525/f1-strategy-app",
+    liveUrl: "https://f1-strategy.app",
     sheet: "05",
     problem:
       "Fans argue pit strategy every race with no way to test whether the alternative call would have worked.",

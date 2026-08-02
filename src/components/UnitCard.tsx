@@ -45,6 +45,11 @@ export function UnitCard({ project }: UnitCardProps) {
         <Link className={styles.view} to={href}>
           View log
         </Link>
+        {project.liveUrl ? (
+          <a className={styles.live} href={project.liveUrl}>
+            Play live
+          </a>
+        ) : null}
         <a className={styles.open} href={`https://github.com/${project.repo}`}>
           Open repo
         </a>

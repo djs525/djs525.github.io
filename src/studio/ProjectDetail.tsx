@@ -37,6 +37,18 @@ export default function ProjectDetail() {
         </Link>
         <h1 className={styles.title}>{project.name}</h1>
         <Tags items={project.classification} />
+
+        {/* The one thing a visitor can act on immediately: a deployed instance
+            they can open and use. It belongs in the first viewport, not down
+            in the activity section beside the source link. */}
+        {project.liveUrl ? (
+          <a className={styles.live} href={project.liveUrl}>
+            Open the live site
+            <span className={styles.liveHost}>
+              {new URL(project.liveUrl).host}
+            </span>
+          </a>
+        ) : null}
       </Reveal>
 
       <section className={styles.section}>

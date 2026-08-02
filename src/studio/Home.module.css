@@ -218,6 +218,7 @@
   text-wrap: pretty;
 }
 
+.rowLive,
 .rowRepo {
   position: relative;
   z-index: 1;
@@ -236,6 +237,17 @@
 
 .rowRepo:hover {
   color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+.rowLive {
+  color: var(--text);
+  font-weight: 500;
+  border-bottom-color: var(--text-3);
+  margin-bottom: calc(var(--s2) * -1);
+}
+
+.rowLive:hover {
   border-bottom-color: var(--text);
 }
 

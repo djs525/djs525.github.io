@@ -180,6 +180,12 @@ export default function ProjectDetail() {
           </div>
         </div>
 
+        {project.liveUrl ? (
+          <a className={styles.open} href={project.liveUrl}>
+            Play live
+          </a>
+        ) : null}
+
         <a className={styles.open} href={`https://github.com/${project.repo}`}>
           Open repo
         </a>

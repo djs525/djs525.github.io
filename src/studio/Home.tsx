@@ -69,6 +69,13 @@ function ProjectRow({
               <span className={styles.stratumPart}>{layer.part}</span>
             </div>
           ))}
+          {/* A working deployment outranks the source, so it sits above it and
+              carries full ink where the repository path stays muted. */}
+          {project.liveUrl ? (
+            <a className={styles.rowLive} href={project.liveUrl}>
+              {new URL(project.liveUrl).host}
+            </a>
+          ) : null}
           <a
             className={styles.rowRepo}
             href={`https://github.com/${project.repo}`}

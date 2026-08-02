@@ -94,6 +94,7 @@
 }
 
 .view,
+.live,
 .open {
   font-family: var(--font-ui);
   font-weight: 700;
@@ -107,6 +108,21 @@
   transition:
     box-shadow var(--t-fast) var(--ease-glide),
     transform var(--t-fast) var(--ease-settle);
+}
+
+/* A deployed instance is the strongest thing a unit carries, so it wears the
+   panel fill with a gold seat: distinct from the gold primary and from the ink
+   secondary, and still unmistakably a button in this world. */
+.live {
+  background: var(--panel-sunk);
+  color: var(--ink);
+  box-shadow: var(--shadow-alt);
+}
+
+.live:hover {
+  background: var(--panel);
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-alt-hover);
 }
 
 /* The primary action on a card: gold, like every other action in the world. */
