@@ -46,6 +46,22 @@
   background: var(--accent);
 }
 
+/* The exit sits apart from the screen tabs — it leaves the world rather than
+   moving inside it — and wears the ink fill the secondary action carries. */
+.exit {
+  margin-left: auto;
+  background: var(--ink);
+  color: var(--panel);
+  box-shadow: var(--shadow-alt);
+  cursor: pointer;
+}
+
+.exit:hover {
+  background: var(--ink);
+  color: var(--panel);
+  box-shadow: var(--shadow-alt-hover);
+}
+
 @media (max-width: 720px) {
   .bar {
     padding: var(--s4) var(--s3) 0;

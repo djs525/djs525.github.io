@@ -1,0 +1,93 @@
+/**
+ * STUDIO — the committed default world. See DESIGN.md.
+ *
+ * Warm neutral ground, hairline structure, one grotesk at real scale. The
+ * surface is monochrome; the single accent is reserved for values that
+ * genuinely arrived from the API this session.
+ *
+ * Fonts are not imported here — ThemeProvider swaps a single <link> so a
+ * studio visitor never downloads the arcade faces.
+ */
+
+:root,
+:root[data-theme="studio"] {
+  color-scheme: light;
+
+  /* --- Ground -------------------------------------------------------- */
+  --bg: #faf9f7;
+  --page-bg: var(--bg);
+
+  /* --- Surfaces ------------------------------------------------------- */
+  --surface: #ffffff;
+  --surface-2: #f4f2ef;
+  --surface-3: #eeeae4;
+  --line: #e7e2db;
+  --line-strong: #d3ccc2;
+
+  /* --- Ink ------------------------------------------------------------ */
+  --ink: #1b1917;
+  --text: var(--ink);
+  --text-2: #57514a;
+  --text-3: #756d64;
+
+  /* --- The only hue in the system: data that is true right now --------- */
+  --live: #0f6b52;
+  --live-wash: #eaf4f0;
+
+  /* --- Form ------------------------------------------------------------ */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  /* --- Depth: low, offset, never a halo -------------------------------- */
+  --shadow-rest:
+    0 1px 2px rgba(27, 25, 23, 0.05), 0 1px 3px rgba(27, 25, 23, 0.04);
+  --shadow-lift:
+    0 2px 4px rgba(27, 25, 23, 0.05), 0 8px 24px -8px rgba(27, 25, 23, 0.12);
+
+  /* --- Spacing --------------------------------------------------------- */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 64px;
+  --s9: 96px;
+
+  --column: 1080px;
+  --gutter: 24px;
+
+  /* --- Type ------------------------------------------------------------ */
+  --font-ui: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system,
+    sans-serif;
+  --font-display: var(--font-ui);
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", monospace;
+  /* One documented exception to the single-family rule: the name is a
+     signature, and a signature is written by hand. Used on Dev's name and
+     nothing else. */
+  --font-signature: "Ms Madi", cursive;
+  --body-size: 17px;
+  --body-weight: 400;
+  --body-leading: 1.6;
+  --measure: 68ch;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+
+  /* --- Focus ----------------------------------------------------------- */
+  --focus-ring: 2px;
+  --focus-color: var(--ink);
+  --focus-offset: 2px;
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --t-fast: 150ms;
+  --t-mid: 260ms;
+  --t-slow: 600ms;
+}
+
+:root[data-theme="studio"] ::selection {
+  background: var(--surface-3);
+}

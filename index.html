@@ -3,12 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dev Shah — Roster</title>
+    <title>Dev Shah — Software, data, product</title>
     <meta
       name="description"
-      content="I build products end to end — interface, service, data, model. Four units on the roster."
+      content="I build products end to end — interface, service, data, model. Four projects, each written up in full."
     />
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      id="theme-fonts"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Ms+Madi&family=Schibsted+Grotesk:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <!--
+      Stamp the stored world before first paint. Without this the page renders
+      studio tokens for a frame and then swaps, which is a visible flash for
+      the one visitor who deliberately chose the other world.
+      Mirrors src/theme/theme.ts — change one, change the other.
+    -->
+    <script>
+      (function () {
+        var STUDIO_FONTS = document.getElementById("theme-fonts").href;
+        var ARCADE_FONTS =
+          "https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@500;600;700;800&display=swap";
+        var theme = "studio";
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "studio" || stored === "arcade") theme = stored;
+        } catch (e) {
+          /* storage unavailable — the default is a complete answer */
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        document.getElementById("theme-fonts").href =
+          theme === "arcade" ? ARCADE_FONTS : STUDIO_FONTS;
+      })();
+    </script>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

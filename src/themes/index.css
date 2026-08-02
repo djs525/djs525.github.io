@@ -1,0 +1,10 @@
+/**
+ * Both token sets, always present, each scoped to its own `data-theme` value.
+ * ThemeProvider stamps the attribute on <html>; nothing else selects a world.
+ *
+ * Studio comes first so its `:root` block is the resting default for a visitor
+ * with no stored preference — including the moment before React mounts.
+ */
+
+@import "./studio.css";
+@import "./arcade.css";

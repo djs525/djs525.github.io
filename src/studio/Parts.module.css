@@ -1,0 +1,115 @@
+/* --- Section heading ---------------------------------------------------- */
+
+.heading {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-bottom: var(--s4);
+  border-bottom: 1px solid var(--line);
+}
+
+.headingTitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+
+.headingMeta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+/* --- Tags --------------------------------------------------------------- */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+/* --- Stat grid ---------------------------------------------------------- */
+
+/* Dividers are drawn by each cell and clipped at the container's edge, rather
+   than by a 1px grid gap over a coloured background. A gap would show through
+   wherever the last row is short — three stats in a six-column track — and
+   read as an empty tile. */
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s5);
+  box-shadow:
+    1px 0 0 0 var(--line),
+    0 1px 0 0 var(--line);
+}
+
+.statLabel {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+
+.statValue {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+/* --- Live value --------------------------------------------------------- */
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 2px 10px 2px 8px;
+  border-radius: var(--r-sm);
+  background: var(--live-wash);
+  color: var(--live);
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--live);
+  flex: none;
+}
+
+.absent {
+  color: var(--text-3);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 400;
+}

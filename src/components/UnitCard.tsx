@@ -1,7 +1,7 @@
-import { DISCIPLINES, type Project } from "../data/projects";
-import { useLiveStats } from "../lib/useLiveStats";
+import { Link } from "react-router-dom";
+import type { Project } from "../data/projects";
 import { useReveal } from "../lib/useReveal";
-import { LiveValue } from "./LiveValue";
+import { Badges } from "./Badges";
 import { PixelSprite } from "./PixelSprite";
 import styles from "./UnitCard.module.css";
 
@@ -9,9 +9,13 @@ interface UnitCardProps {
   readonly project: Project;
 }
 
+/**
+ * A roster entry: enough to recognise the unit and decide to open it. The log,
+ * the four strata and the telemetry all live on the unit's own page.
+ */
 export function UnitCard({ project }: UnitCardProps) {
   const { ref, revealed } = useReveal<HTMLElement>();
-  const stats = useLiveStats(project.repo);
+  const href = `/projects/${project.slug}`;
 
   return (
     <article
@@ -24,51 +28,23 @@ export function UnitCard({ project }: UnitCardProps) {
           <PixelSprite sprite={project.sprite} size={88} />
         </div>
         <div className={styles.identity}>
-          <h3 className={styles.name}>{project.name}</h3>
-          <div className={styles.badges}>
-            {DISCIPLINES.map((discipline) => {
-              const on = project.classification.includes(discipline);
-              return (
-                <span
-                  key={discipline}
-                  className={`${styles.badge} ${on ? styles[`badge${discipline}`] : styles.badgeOff}`}
-                >
-                  {discipline}
-                </span>
-              );
-            })}
-          </div>
+          <h3 className={styles.name}>
+            <Link className={styles.nameLink} to={href}>
+              {project.name}
+            </Link>
+          </h3>
+          <Badges classification={project.classification} />
         </div>
       </header>
 
-      {/* The stack, as one line. The role names are the same four every time,
-          so naming them per row was sixteen repetitions of nothing. */}
-      <p className={styles.stack}>
-        {project.layers.map((layer) => layer.part).join(" · ")}
-      </p>
+      <p className={styles.hook}>{project.hook}</p>
 
-      <div className={styles.log}>
-        <p className={styles.logEntry}>
-          <span className={styles.logKey}>PROBLEM</span>
-          {project.problem}
-        </p>
-        <p className={styles.logEntry}>
-          <span className={styles.logKey}>METHOD</span>
-          {project.approach}
-        </p>
-        <p className={styles.logEntry}>
-          <span className={styles.logKey}>RESULT</span>
-          {project.outcome}
-        </p>
-      </div>
-
+      {/* Two links side by side, never nested: an <a> inside an <a> is invalid
+          HTML and the browser silently restructures it. */}
       <footer className={styles.footer}>
-        <span className={styles.stat}>
-          Commits
-          <span className={styles.statValue}>
-            <LiveValue stats={stats} select={(d) => String(d.commits)} />
-          </span>
-        </span>
+        <Link className={styles.view} to={href}>
+          View log
+        </Link>
         <a className={styles.open} href={`https://github.com/${project.repo}`}>
           Open repo
         </a>

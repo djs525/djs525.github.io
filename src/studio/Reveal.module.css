@@ -1,0 +1,23 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--t-slow) var(--ease),
+    transform var(--t-slow) var(--ease);
+}
+
+.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* useReveal reports revealed immediately under reduced motion; this removes
+   the transition itself so nothing eases into place. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0ms !important;
+  }
+}

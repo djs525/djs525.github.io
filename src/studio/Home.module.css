@@ -1,0 +1,254 @@
+/* --- Hero --------------------------------------------------------------- */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s5);
+  padding-top: var(--s6);
+}
+
+.lead {
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: var(--text-2);
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s4);
+  margin: var(--s2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Deliberately not a flex container: the mono figures are inline children, and
+   flex would turn the spaces around them into collapsed anonymous items —
+   "GPA3.80". The divider is a border on the item instead. */
+.credential {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+
+.credential + .credential {
+  padding-left: var(--s4);
+  border-left: 1px solid var(--line-strong);
+}
+
+.figure {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin-top: var(--s2);
+}
+
+.primary {
+  padding: 11px 20px;
+  border-radius: var(--r-pill);
+  background: var(--text);
+  color: var(--surface);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: var(--shadow-rest);
+  transition:
+    transform var(--t-fast) var(--ease),
+    box-shadow var(--t-fast) var(--ease);
+}
+
+.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lift);
+}
+
+.primary:active {
+  transform: none;
+  box-shadow: var(--shadow-rest);
+}
+
+.secondary {
+  padding: 10px 19px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.secondary:hover {
+  background: var(--surface-2);
+  border-color: var(--text-3);
+}
+
+/* --- Project index ------------------------------------------------------ */
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rowWrap {
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--s7);
+  padding: var(--s6) var(--s4);
+  margin: 0 calc(var(--s4) * -1);
+  border-radius: var(--r-md);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.row:hover {
+  background: var(--surface-2);
+}
+
+.rowMain {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+.rowName {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.rowLink {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s3);
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* The row, not just the title, is the target. */
+.rowLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-md);
+}
+
+.rowArrow {
+  font-size: 1.125rem;
+  color: var(--text-3);
+  transition:
+    transform var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.row:hover .rowArrow {
+  transform: translateX(4px);
+  color: var(--text);
+}
+
+.rowHook {
+  font-size: 1.0625rem;
+  color: var(--text-2);
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+
+.rowStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding-top: 6px;
+  min-width: 0;
+}
+
+.stratum {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: var(--s3);
+  align-items: baseline;
+  font-size: 0.8125rem;
+}
+
+.stratumRole {
+  color: var(--text-3);
+}
+
+.stratumPart {
+  color: var(--text-2);
+  text-wrap: pretty;
+}
+
+.rowRepo {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  margin-top: var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 2px;
+  transition:
+    color var(--t-fast) var(--ease),
+    border-color var(--t-fast) var(--ease);
+}
+
+.rowRepo:hover {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+/* Wrapped, the vertical rules would land at the start of a line and read as
+   bullets. Below this width each credential simply takes its own line. */
+@media (max-width: 760px) {
+  .credentials {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s2);
+  }
+
+  .credential + .credential {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 860px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: var(--s5);
+    padding: var(--s5) var(--s3);
+    margin: 0 calc(var(--s3) * -1);
+  }
+
+  .rowStack {
+    padding-top: 0;
+  }
+}

@@ -1,11 +1,16 @@
 /**
- * ARCADE — the committed world. See DESIGN.md.
+ * ARCADE — the opt-in second world. See DESIGN.md.
  * Hard shadows, square corners, lit arena sky.
+ *
+ * Scoped entirely under [data-theme="arcade"]: none of these tokens exist in
+ * the studio world, and no studio token is visible here. Fonts load through
+ * the <link> ThemeProvider swaps rather than an @import, so a studio visitor
+ * never pays for Lilita One and Baloo 2.
  */
 
-@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@500;600;700;800&display=swap");
+:root[data-theme="arcade"] {
+  color-scheme: light;
 
-:root {
   /* --- Ground -------------------------------------------------------- */
   --sky: #2f6ff2;
   --sky-deep: #1c46b0;
@@ -64,10 +69,19 @@
   /* --- Type ------------------------------------------------------------ */
   --font-display: "Lilita One", ui-rounded, system-ui, sans-serif;
   --font-ui: "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --body-size: 17px;
+  --body-weight: 500;
+  --body-leading: 1.5;
+  --measure: 62ch;
   --display-weight: 400;
   --display-tracking: 0.01em;
   --label-tracking: 0.06em;
   --label-transform: uppercase;
+
+  /* --- Focus ----------------------------------------------------------- */
+  --focus-ring: var(--edge);
+  --focus-color: var(--gold);
+  --focus-offset: var(--s1);
 
   /* --- Motion ---------------------------------------------------------- */
   --ease-settle: cubic-bezier(0.34, 1.32, 0.48, 1);
@@ -75,4 +89,9 @@
   --t-fast: 180ms;
   --t-mid: 420ms;
   --t-slow: 900ms;
+}
+
+/* Pixels are square. Scoped, because the studio world uses radii throughout. */
+:root[data-theme="arcade"] button {
+  border-radius: 0;
 }

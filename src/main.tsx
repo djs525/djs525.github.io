@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { ThemeProvider } from "./theme/ThemeProvider";
 import "@theme";
 import "./styles/base.css";
 
@@ -18,7 +19,9 @@ if (!container) throw new Error("#root missing from index.html");
 createRoot(container).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   </StrictMode>,
 );

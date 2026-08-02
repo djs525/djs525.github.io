@@ -1,0 +1,313 @@
+.back {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  text-decoration: none;
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  box-shadow: var(--shadow-btn);
+  margin-bottom: var(--s4);
+  transition:
+    transform var(--t-fast) var(--ease-settle),
+    box-shadow var(--t-fast) var(--ease-glide);
+}
+
+.back:hover {
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* Ink on sky is unreadable, so every block of prose sits on a panel. */
+.plate,
+.strata,
+.record,
+.telemetry {
+  background: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+}
+
+.plate {
+  padding: var(--s5) var(--s4);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  border-bottom: var(--edge) solid var(--ink);
+  padding-bottom: var(--s4);
+  margin-bottom: var(--s4);
+}
+
+.portrait {
+  flex: none;
+  background: var(--panel-sunk);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s3);
+  display: grid;
+  place-items: center;
+}
+
+/* The unit wakes up when you look at it, as it does on the roster. */
+.portrait:hover {
+  --sprite-cycle: 0.55s;
+}
+
+.identity {
+  min-width: 0;
+}
+
+.sheet {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--ink-soft);
+  background: var(--panel-sunk);
+  border: var(--edge-thin) solid var(--panel-edge);
+  border-radius: var(--radius-sm);
+  padding: 2px var(--s2);
+  margin-bottom: var(--s2);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  line-height: 1.05;
+  word-break: break-word;
+}
+
+.log {
+  display: grid;
+  gap: var(--s4);
+}
+
+.logEntry {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.logKey {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  color: var(--ink);
+  background: var(--gold);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 1px var(--s1);
+  margin-right: var(--s2);
+  white-space: nowrap;
+}
+
+/* --- The four strata --------------------------------------------------- */
+
+.strata {
+  margin: 0;
+  padding: var(--s4);
+  display: grid;
+  gap: var(--s3);
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 116px 1fr;
+  gap: var(--s3);
+  align-items: baseline;
+  padding-bottom: var(--s3);
+  border-bottom: var(--edge-thin) solid var(--panel-edge);
+}
+
+.layer:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.layerRole {
+  justify-self: start;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  background: var(--gold);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 2px var(--s2);
+}
+
+.layerPart {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* What the stratum means in general, under what it is in this unit. */
+.layerGeneric {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* --- Build record -------------------------------------------------------
+ *
+ * Deliberately plain ink, never the reserved live colour: these figures were
+ * true during a window in the past, and the banner carries that window.
+ */
+
+.record {
+  padding: var(--s4);
+  display: grid;
+  gap: var(--s4);
+  justify-items: start;
+}
+
+.recordSource {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.styleBlock {
+  background: var(--panel-sunk);
+  border-left: var(--edge) solid var(--ink);
+  padding: var(--s3);
+}
+
+.styleName {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  line-height: 1.15;
+  margin-top: var(--s1);
+}
+
+.styleNote {
+  margin-top: var(--s1);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.strengths {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--s2);
+}
+
+/* A tick per item, drawn in the margin rather than as a bullet glyph. */
+.strength {
+  position: relative;
+  padding-left: var(--s4);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 62ch;
+}
+
+.strength::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-ui);
+  font-weight: 800;
+  /* Not --live: that colour is reserved for values fetched seconds ago. */
+  color: var(--ink);
+}
+
+/* --- Telemetry ---------------------------------------------------------- */
+
+.telemetry {
+  padding: var(--s4);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s4);
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5);
+}
+
+.stat {
+  display: grid;
+  gap: var(--s1);
+}
+
+.statLabel {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  color: var(--ink-soft);
+}
+
+.statValue {
+  font-size: 1rem;
+}
+
+.open {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  text-decoration: none;
+  background: var(--ink);
+  color: var(--panel);
+  border: var(--edge) solid var(--ink);
+  border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+  box-shadow: var(--shadow-alt);
+  transition:
+    box-shadow var(--t-fast) var(--ease-glide),
+    transform var(--t-fast) var(--ease-settle);
+}
+
+.open:hover {
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-alt-hover);
+}
+
+@media (max-width: 720px) {
+  .plate {
+    padding: var(--s4) var(--s3);
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s3);
+  }
+
+  .layer {
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+  }
+
+  .stats {
+    gap: var(--s4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back,
+  .open {
+    transition: none;
+  }
+}

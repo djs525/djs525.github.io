@@ -1,0 +1,34 @@
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+  margin-top: var(--s2);
+}
+
+.badge {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: var(--label-tracking);
+  text-transform: var(--label-transform);
+  padding: 2px var(--s2);
+  border: var(--edge-thin) solid var(--ink);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+}
+
+.badgeINTERFACE {
+  background: var(--magenta);
+}
+.badgeDATA {
+  background: var(--cyan);
+}
+.badgePRODUCT {
+  background: var(--green);
+}
+
+.badgeOff {
+  background: var(--panel-sunk);
+  color: var(--ink-soft);
+  border-color: var(--panel-edge);
+}

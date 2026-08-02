@@ -1,3 +1,9 @@
+/**
+ * World-neutral base. Every value here reads a token, so the same rules serve
+ * studio and arcade; anything that only makes sense in one world lives in that
+ * world's theme file instead.
+ */
+
 *,
 *::before,
 *::after {
@@ -12,10 +18,9 @@ body {
   margin: 0;
   color: var(--ink);
   font-family: var(--font-ui);
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.5;
-  /* The arena: light gathers at the top and falls away toward the floor. */
+  font-weight: var(--body-weight);
+  font-size: var(--body-size);
+  line-height: var(--body-leading);
   background: var(--page-bg) fixed;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -33,7 +38,7 @@ h3 {
 
 p {
   margin: 0;
-  max-width: 62ch;
+  max-width: var(--measure);
 }
 
 a {
@@ -46,12 +51,11 @@ a {
 }
 
 :focus-visible {
-  outline: var(--edge) solid var(--gold);
-  outline-offset: var(--s1);
+  outline: var(--focus-ring) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
 }
 
 button {
-  border-radius: 0;
   font: inherit;
   cursor: pointer;
 }

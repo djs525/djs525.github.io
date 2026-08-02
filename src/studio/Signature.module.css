@@ -1,0 +1,105 @@
+.signature {
+  font-family: var(--font-signature);
+  /* Ms Madi has a small x-height for its em, so it needs a larger size than
+     the grotesk display step to hold the same optical weight. */
+  font-size: clamp(3.6rem, 9.5vw, 6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0;
+  color: var(--text);
+  /* Descenders and the trailing flourish sit below the baseline; without this
+     the mask and the layout both clip them. */
+  padding: 0.06em 0.08em 0.18em 0;
+  margin-left: -0.02em;
+}
+
+/*
+ * The reveal is a soft-edged gradient wider than the element, slid across it.
+ * A hard edge reads as a wipe; the 8% ramp reads as ink arriving.
+ */
+.waiting,
+.writing {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 46%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 54%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 46%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 54%
+  );
+  -webkit-mask-size: 220% 100%;
+  mask-size: 220% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+}
+
+.writing {
+  will-change: mask-position;
+  animation: write 1400ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+/* Mask removed outright once the name is signed — nothing left compositing. */
+.written {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/*
+ * The stops are deliberately uneven. A linear sweep reads as a machine; a hand
+ * accelerates through a stroke, slows into a join, and lifts between words —
+ * the near-flat segment from 30% to 38% is that lift, landing in the gap
+ * between "Dev" and "Shah".
+ */
+@keyframes write {
+  0% {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  14% {
+    -webkit-mask-position: 83% 0;
+    mask-position: 83% 0;
+  }
+  30% {
+    -webkit-mask-position: 61% 0;
+    mask-position: 61% 0;
+  }
+  38% {
+    -webkit-mask-position: 57% 0;
+    mask-position: 57% 0;
+  }
+  56% {
+    -webkit-mask-position: 37% 0;
+    mask-position: 37% 0;
+  }
+  74% {
+    -webkit-mask-position: 19% 0;
+    mask-position: 19% 0;
+  }
+  88% {
+    -webkit-mask-position: 8% 0;
+    mask-position: 8% 0;
+  }
+  100% {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+/* Signed already, no stroke. The component resolves to `written` on its own
+   under reduced motion; this is the belt-and-braces for a preference that
+   changes mid-visit. */
+@media (prefers-reduced-motion: reduce) {
+  .waiting,
+  .writing {
+    -webkit-mask-image: none;
+    mask-image: none;
+    animation: none;
+    will-change: auto;
+  }
+}

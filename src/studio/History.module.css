@@ -1,0 +1,125 @@
+.entries {
+  display: flex;
+  flex-direction: column;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s7);
+  padding: var(--s7) 0;
+  border-top: 1px solid var(--line);
+}
+
+/* The section heading already draws a rule; a second one under it would read
+   as a doubled edge. */
+.entry:first-child {
+  border-top: 0;
+}
+
+.entry:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  padding-top: 5px;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+}
+
+.place {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s3);
+  min-width: 0;
+}
+
+.role {
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.org {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+}
+
+.figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  margin: var(--s2) 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The figures are stored uppercase for the arcade world; the studio world is
+   sentence case throughout, so the casing is normalised in presentation and
+   the approved strings themselves stay untouched. */
+.figure {
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: lowercase;
+}
+
+.bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  margin: var(--s2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullet {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 68ch;
+  text-wrap: pretty;
+}
+
+.stack {
+  margin-top: var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-3);
+  max-width: none;
+}
+
+@media (max-width: 860px) {
+  .entry {
+    grid-template-columns: 1fr;
+    gap: var(--s4);
+    padding: var(--s6) 0;
+  }
+
+  .meta {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--s3);
+    padding-top: 0;
+  }
+}

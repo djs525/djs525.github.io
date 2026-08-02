@@ -15,3 +15,9 @@ dist/
 # The transcript carries a student number; every resume carries a phone
 # number and home city. Nothing here should enter public git history.
 *.pdf
+
+# React practice work. Kept on disk next to the real code because that is
+# where it is convenient to work on it, but it is not part of the published
+# site and does not belong in a repo recruiters open.
+learning/
+src/**/exercise-*

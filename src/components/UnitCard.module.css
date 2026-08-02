@@ -62,73 +62,24 @@
   word-break: break-word;
 }
 
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s1);
-  margin-top: var(--s2);
+/* The heading is the link; it should still read as the heading. */
+.nameLink {
+  text-decoration: none;
+  color: inherit;
 }
 
-.badge {
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: var(--label-tracking);
-  text-transform: var(--label-transform);
-  padding: 2px var(--s2);
-  border: var(--edge-thin) solid var(--ink);
-  border-radius: var(--radius-sm);
-  color: var(--ink);
+.nameLink:hover {
+  text-decoration: underline;
+  text-decoration-thickness: var(--edge-thin);
+  text-underline-offset: 3px;
 }
 
-.badgeINTERFACE {
-  background: var(--magenta);
-}
-.badgeDATA {
-  background: var(--cyan);
-}
-.badgePRODUCT {
-  background: var(--green);
-}
-
-.badgeOff {
-  background: var(--panel-sunk);
-  color: var(--ink-soft);
-  border-color: var(--panel-edge);
-}
-
-.stack {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
-  background: var(--panel-sunk);
-  border-left: var(--edge) solid var(--ink);
-  padding: var(--s2);
-  margin-bottom: var(--s4);
-}
-
-.log {
-  display: grid;
-  gap: var(--s3);
-  margin-bottom: var(--s4);
-}
-
-.logEntry {
+/* The preview line: what makes someone open the unit. */
+.hook {
   font-size: 0.95rem;
   line-height: 1.55;
-}
-
-.logKey {
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: var(--label-tracking);
-  color: var(--ink);
-  background: var(--gold);
-  border: var(--edge-thin) solid var(--ink);
-  border-radius: var(--radius-sm);
-  padding: 1px var(--s1);
-  margin-right: var(--s2);
-  white-space: nowrap;
+  color: var(--ink-soft);
+  margin-bottom: var(--s4);
 }
 
 .footer {
@@ -142,19 +93,7 @@
   margin-top: auto;
 }
 
-.stat {
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: var(--label-tracking);
-  text-transform: var(--label-transform);
-  color: var(--ink-soft);
-}
-
-.statValue {
-  margin-left: var(--s2);
-}
-
+.view,
 .open {
   font-family: var(--font-ui);
   font-weight: 700;
@@ -162,15 +101,35 @@
   letter-spacing: var(--label-tracking);
   text-transform: var(--label-transform);
   text-decoration: none;
-  background: var(--ink);
-  color: var(--panel);
   border: var(--edge) solid var(--ink);
   border-radius: var(--radius);
   padding: var(--s2) var(--s3);
-  box-shadow: var(--shadow-alt);
   transition:
     box-shadow var(--t-fast) var(--ease-glide),
     transform var(--t-fast) var(--ease-settle);
+}
+
+/* The primary action on a card: gold, like every other action in the world. */
+.view {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-btn);
+}
+
+.view:hover {
+  transform: translate(var(--lift-x), var(--lift));
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* The focus ring must not vanish into the button it rings. */
+.view:focus-visible {
+  outline-color: var(--ink);
+}
+
+.open {
+  background: var(--ink);
+  color: var(--panel);
+  box-shadow: var(--shadow-alt);
 }
 
 .open:hover {
@@ -180,6 +139,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .card,
+  .view,
   .open {
     transition: none;
   }

@@ -20,9 +20,43 @@ export interface Layer {
 /** Classification across the disciplines this work spans. */
 export type Discipline = "INTERFACE" | "DATA" | "PRODUCT";
 
+/**
+ * An outside analysis of how a unit was built, rather than what it does.
+ *
+ * These figures are a dated snapshot, not live telemetry — they must never be
+ * rendered through LiveValue or placed in the TELEMETRY section, because the
+ * reserved live colour means "this number was true seconds ago". Every value
+ * below is transcribed from the linked report, unaltered. Optional: only units
+ * that have actually been analysed carry one.
+ */
+export interface BuildRecord {
+  /** Who produced the analysis, e.g. "Paxel". */
+  readonly source: string;
+  readonly url: string;
+  /** The period the analysis covers. */
+  readonly window: string;
+  readonly sessions: number;
+  readonly hours: number;
+  readonly lines: number;
+  readonly commits: number;
+  readonly longestSession: string;
+  /** The collaboration style the report names. */
+  readonly style: string;
+  readonly styleNote: string;
+  /** Strengths the report identified, in its own words. */
+  readonly strengths: readonly string[];
+}
+
 export interface Project {
   readonly slug: string;
   readonly name: string;
+  /**
+   * The roster preview line — the one sentence that makes someone open the
+   * unit. PLACEHOLDER: each of these currently repeats the project's own
+   * `problem` verbatim, so no unapproved claim has entered the file. Replace
+   * with purpose-written copy when Dev has drafted it.
+   */
+  readonly hook: string;
   readonly repo: string;
   /** Drawing sheet number, in filing order. */
   readonly sheet: string;
@@ -32,6 +66,7 @@ export interface Project {
   readonly layers: readonly [Layer, Layer, Layer, Layer];
   readonly classification: readonly Discipline[];
   readonly sprite: Sprite;
+  readonly buildRecord?: BuildRecord;
 }
 
 export const PRACTICE_STACK: readonly [Layer, Layer, Layer, Layer] = [
@@ -45,6 +80,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "brawlbot",
     name: "BrawlBot",
+    hook: "Brawl Stars players check their stats on dashboards, away from the chat where they actually talk about the game.",
     repo: "djs525/brawlbot",
     sheet: "02",
     problem:
@@ -61,10 +97,29 @@ export const PROJECTS: readonly Project[] = [
     ],
     classification: ["INTERFACE", "DATA", "PRODUCT"],
     sprite: SPRITE_BOT,
+    buildRecord: {
+      source: "Paxel",
+      url: "https://paxel.ycombinator.com/results/sqyae1ks",
+      window: "11–19 July 2026",
+      sessions: 23,
+      hours: 18,
+      lines: 2109,
+      commits: 10,
+      longestSession: "3h 03m",
+      style: "Dances with Robots",
+      styleNote:
+        "Back-and-forth dialogue, where ideas iterate dynamically rather than arriving finished.",
+      strengths: [
+        "User-facing correctness instincts that catch data inconsistencies",
+        "Effective scope-boundary judgment",
+        "A strong debugging loop, pairing manual logs with AI assistance",
+      ],
+    },
   },
   {
     slug: "gsd-ai",
     name: "GSD.AI",
+    hook: "Culinary entrepreneurs sign leases without knowing which cuisines a neighborhood already oversupplies, or whether a concept survives there.",
     repo: "djs525/bits-datathon",
     sheet: "03",
     problem:
@@ -84,6 +139,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "cortex",
     name: "Cortex",
+    hook: "A startup's weekly review means manually assembling deals, goals, investors, and hiring pipeline from scattered sources.",
     repo: "djs525/cortex-startup-oi",
     sheet: "04",
     problem:
@@ -104,6 +160,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "f1-strategy-lab",
     name: "F1 Strategy Lab",
+    hook: "Fans argue pit strategy every race with no way to test whether the alternative call would have worked.",
     repo: "djs525/f1-strategy-app",
     sheet: "05",
     problem:

@@ -56,11 +56,19 @@ The differentiator is depth of demonstrated work: real projects with real write-
 
 ## Brand Commitments
 
-The handheld-game visual world is **pinned by Dev**, chosen after three direction rolls were declined. It is a standing commitment, not a per-surface decision: future surfaces inherit the roster world rather than reopening the question. Dev plays Brawl Stars, Pokémon Champions, and Pokémon TCG Pocket, and the register is drawn from contemporary game UI rather than retro-arcade nostalgia.
+**Superseded 1 Aug 2026 — the site now ships two worlds, and the default is no longer the game world.** Dev's judgement: the handheld-game world does not survive a professional read, and the site's first job is a hiring decision.
 
-Two directions are permanently rejected: the document metaphor (sheets, borders, title blocks — anything reading as a printed CV) and the dark-mode developer portfolio.
+**The default world is the modern product canon, pinned by Dev.** Asked to choose a register, Dev took the standing exit: the product-marketing lane played straight, at the craft level of the companies that own it. The named bar is Notion — its warm neutrals, humanist type, calm readable surfaces — **as a craft level only**. Dev's instruction is explicit: *"don't directly use their colors or styles, be a little subtle."* No borrowed palette, no borrowed component shapes, no pastiche. The canon is executed at full fidelity with no irony and no smuggled quirk; a knowing wink inside this world is a failure, not a signature.
 
-Note this expands, but does not contradict, the rule that hobby *content* lives on the About page. Gaming supplies the site's visual language everywhere; gaming *data* — Steam, chess.com, and similar — still appears only on About.
+Two further commitments follow from that:
+- **Light ground.** The scene is a recruiter mid-screen on a bright office monitor. The dark-mode developer portfolio stays rejected — now on use-scene grounds as well as taste.
+- **Neutral professional vocabulary.** The default world says Projects, Experience, Overview, Stack, Activity. Game vocabulary — Roster, units, campaigns, telemetry, sheet numbers — belongs to the arcade world only. Same approved facts, different labels; the wording-approval rule covers both sets.
+
+**The handheld-game world survives as an opt-in second rendition.** It is not deleted and not deprecated: it is the fun side of Dev, offered deliberately once the work has been read, from the footer. Everything DESIGN.md records about it still binds inside it.
+
+The document metaphor stays permanently rejected — sheets, borders, title blocks, anything reading as a printed CV — in both worlds.
+
+The rule that hobby *content* lives on the About page is unchanged. Gaming no longer supplies the default visual language; gaming *data* — Steam, chess.com, and similar — still appears only on About.
 
 ## Evidence on Hand
 

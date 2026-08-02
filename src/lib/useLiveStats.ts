@@ -27,13 +27,13 @@ export type LiveStats =
 
 const API_BASE = import.meta.env["VITE_API_BASE"] as string | undefined;
 
-export function useLiveStats(repo: string): LiveStats {
+export function useLiveStats(repo: string | undefined): LiveStats {
   const [state, setState] = useState<LiveStats>(
     API_BASE ? { status: "loading" } : { status: "unavailable" },
   );
 
   useEffect(() => {
-    if (!API_BASE) return;
+    if (!API_BASE || !repo) return;
 
     const controller = new AbortController();
 

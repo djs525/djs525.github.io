@@ -33,7 +33,7 @@ export const INTERESTS: readonly Interest[] = [
     id: "tcg-pocket",
     name: "Pokémon TCG Pocket",
     kind: "Playing",
-    note: "Daily packs. The collection pressure is a very well-designed trap.",
+    note: "Started with the game, now collecting actual TCG cards.",
   },
   {
     id: "formula-1",

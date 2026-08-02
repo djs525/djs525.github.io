@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { useTheme } from "../theme/ThemeProvider";
 import styles from "./Nav.module.css";
 
 const SCREENS = [
@@ -11,6 +12,8 @@ const SCREENS = [
 
 /** The menu bar. Each screen is a real route, so every one is linkable. */
 export function Nav() {
+  const { setTheme } = useTheme();
+
   return (
     <nav className={styles.bar} aria-label="Screens">
       {SCREENS.map((screen) => (
@@ -25,6 +28,16 @@ export function Nav() {
           {screen.label}
         </NavLink>
       ))}
+
+      {/* The way back. A visitor who opted in here must be able to opt out
+          from the same bar they arrived through. */}
+      <button
+        type="button"
+        className={`${styles.tab} ${styles.exit}`}
+        onClick={() => setTheme("studio")}
+      >
+        Exit arcade
+      </button>
     </nav>
   );
 }

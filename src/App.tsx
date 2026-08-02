@@ -1,26 +1,87 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { useTheme } from "./theme/ThemeProvider";
+
 import { Arena } from "./components/Arena";
 import { Nav } from "./components/Nav";
-import Home from "./pages/Home";
-import Experience from "./pages/Experience";
-import Leadership from "./pages/Leadership";
-import Achievements from "./pages/Achievements";
-import About from "./pages/About";
+import ArcadeHome from "./pages/Home";
+import ArcadeExperience from "./pages/Experience";
+import ArcadeProjectDetail from "./pages/ProjectDetail";
+import ArcadeLeadership from "./pages/Leadership";
+import ArcadeAchievements from "./pages/Achievements";
+import ArcadeAbout from "./pages/About";
 
-export default function App() {
+import { Shell } from "./studio/Shell";
+import StudioHome from "./studio/Home";
+import StudioExperience from "./studio/Experience";
+import StudioProjectDetail from "./studio/ProjectDetail";
+import StudioLeadership from "./studio/Leadership";
+import StudioAchievements from "./studio/Achievements";
+import StudioAbout from "./studio/About";
+
+/**
+ * A router swap only exchanges components — the browser keeps the old scroll
+ * position, so opening a project from the foot of the index would otherwise
+ * land mid-page. Renders nothing; the effect is the whole point.
+ */
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+/**
+ * The two worlds share these six routes and every fact behind them, and share
+ * no presentation at all. Each tree names its own components explicitly rather
+ * than passing a theme down, so nothing in the studio world can reach an
+ * arcade module by accident. See DESIGN.md → Theme switching.
+ */
+function StudioApp() {
+  return (
+    <Shell>
+      <Routes>
+        <Route path="/" element={<StudioHome />} />
+        <Route path="/experience" element={<StudioExperience />} />
+        <Route path="/projects/:slug" element={<StudioProjectDetail />} />
+        <Route path="/leadership" element={<StudioLeadership />} />
+        <Route path="/achievements" element={<StudioAchievements />} />
+        <Route path="/about" element={<StudioAbout />} />
+        {/* Any unknown path lands on the index rather than a dead end. */}
+        <Route path="*" element={<StudioHome />} />
+      </Routes>
+    </Shell>
+  );
+}
+
+function ArcadeApp() {
   return (
     <>
       <Arena />
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/experience" element={<Experience />} />
-        <Route path="/leadership" element={<Leadership />} />
-        <Route path="/achievements" element={<Achievements />} />
-        <Route path="/about" element={<About />} />
-        {/* Any unknown path lands on the roster rather than a dead end. */}
-        <Route path="*" element={<Home />} />
+        <Route path="/" element={<ArcadeHome />} />
+        <Route path="/experience" element={<ArcadeExperience />} />
+        <Route path="/projects/:slug" element={<ArcadeProjectDetail />} />
+        <Route path="/leadership" element={<ArcadeLeadership />} />
+        <Route path="/achievements" element={<ArcadeAchievements />} />
+        <Route path="/about" element={<ArcadeAbout />} />
+        <Route path="*" element={<ArcadeHome />} />
       </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  const { theme } = useTheme();
+
+  return (
+    <>
+      <ScrollToTop />
+      {theme === "arcade" ? <ArcadeApp /> : <StudioApp />}
     </>
   );
 }
