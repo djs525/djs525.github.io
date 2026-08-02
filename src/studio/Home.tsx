@@ -94,14 +94,14 @@ export default function Home() {
 
         <p className={styles.lead}>
           I build products end to end. Every project here started as something I
-          wanted to exist, and I built every layer of it — the interface you
+          wanted to exist, and I built every layer of it: the interface you
           touch, the service behind it, the data underneath, and the model that
           decides.
         </p>
 
         <ul className={styles.credentials}>
           <li className={styles.credential}>
-            B.S. Computer Science, Data Science minor — Rutgers,{" "}
+            B.S. Computer Science, Data Science minor · Rutgers{" "}
             <span className={styles.figure}>2026</span>
           </li>
           <li className={styles.credential}>

@@ -88,7 +88,7 @@ export const PROJECTS: readonly Project[] = [
     approach:
       "I built a Discord bot that answers natural-language questions from live Supercell API data. A Gemini tool-use agent drives a drop-in plugin registry and a model-fallback chain; SQLite persistence extends the API's 25-battle log window.",
     outcome:
-      "Players link a tag with /link and ask anything with /ask — profile, brawlers, battle log, meta, event rotation, rankings.",
+      "Players link a tag with /link and ask anything with /ask: profile, brawlers, battle log, meta, event rotation, rankings.",
     layers: [
       { role: "INTERFACE", part: "Discord slash commands" },
       { role: "SERVICE", part: "Plugin registry, model-fallback chain" },
@@ -125,7 +125,7 @@ export const PROJECTS: readonly Project[] = [
     problem:
       "Culinary entrepreneurs sign leases without knowing which cuisines a neighborhood already oversupplies, or whether a concept survives there.",
     approach:
-      "I built a full-stack platform that mines thousands of Yelp reviews and restaurant firmographic data across New Jersey — XGBoost classification, VADER sentiment, SHAP attribution — behind a React and Leaflet/Carto map UI on a FastAPI backend.",
+      "I built a full-stack platform that mines thousands of Yelp reviews and restaurant firmographic data across New Jersey (XGBoost classification, VADER sentiment, SHAP attribution) behind a React and Leaflet/Carto map UI on a FastAPI backend.",
     outcome: "1st place at the Rutgers BITS × IBM Datathon.",
     layers: [
       { role: "INTERFACE", part: "React, Leaflet/Carto map" },
@@ -145,9 +145,9 @@ export const PROJECTS: readonly Project[] = [
     problem:
       "A startup's weekly review means manually assembling deals, goals, investors, and hiring pipeline from scattered sources.",
     approach:
-      'I wrote a system prompt that turns Claude into an autonomous operating agent over a Notion workspace via MCP. "run Cortex" writes the full weekly review — health-scored, eight sections populated — with no manual input.',
+      'I wrote a system prompt that turns Claude into an autonomous operating agent over a Notion workspace via MCP. "run Cortex" writes the full weekly review, health-scored and eight sections populated, with no manual input.',
     outcome:
-      "I built it during the Notion × MLH hackathon; it did not place. I wrote it to behave like an enterprise operating tool rather than a hackathon demo — an agent that runs the review, not a script that formats one.",
+      "I built it during the Notion × MLH hackathon; it did not place. I wrote it to behave like an enterprise operating tool rather than a hackathon demo: an agent that runs the review, not a script that formats one.",
     layers: [
       { role: "INTERFACE", part: "Notion workspace" },
       { role: "SERVICE", part: "MCP connection" },
@@ -168,7 +168,7 @@ export const PROJECTS: readonly Project[] = [
     approach:
       "I built a full-stack race strategy simulator trained on 7+ years of F1 telemetry; an ML pit-stop optimizer ranks strategies by projected finish position, served via REST API, containerized with Docker, deployed on DigitalOcean.",
     outcome:
-      "A passion project — I'm a longtime F1 fan, and building in that space was the motivation. No competition, no external outcome.",
+      "A passion project. I'm a longtime F1 fan, and building in that space was the motivation. No competition, no external outcome.",
     layers: [
       { role: "INTERFACE", part: "Strategy simulator UI" },
       { role: "SERVICE", part: "FastAPI REST, Docker" },

@@ -9,7 +9,7 @@
 export const ROUTE_META = {
   home: {
     description:
-      "I build products end to end — the interface you touch, the service behind it, the data underneath, and the model that decides. Four projects, each written up in full.",
+      "I build products end to end: the interface you touch, the service behind it, the data underneath, and the model that decides. Four projects, each written up in full.",
   },
   experience: {
     title: "Experience",
@@ -27,6 +27,6 @@ export const ROUTE_META = {
   },
   about: {
     title: "About",
-    description: "Off the clock — what I play, and what I watch.",
+    description: "Off the clock: what I play, and what I watch.",
   },
 } as const;

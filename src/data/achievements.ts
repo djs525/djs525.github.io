@@ -17,28 +17,28 @@ export interface Achievement {
 export const ACHIEVEMENTS: readonly Achievement[] = [
   {
     id: "bits-ibm",
-    title: "1st Place — Rutgers BITS × IBM Datathon",
+    title: "1st Place, Rutgers BITS × IBM Datathon",
     rarity: "GOLD",
     when: "Mar 2026",
     detail: "I built GSD.AI. Judged by IBM and JPMorgan professionals.",
   },
   {
     id: "bits-barclays",
-    title: "1st Place — Rutgers BITS × Barclays Datathon",
+    title: "1st Place, Rutgers BITS × Barclays Datathon",
     rarity: "GOLD",
     when: "Mar 2025",
     detail: "Stock prediction model.",
   },
   {
     id: "dsc-datathon",
-    title: "1st Place — Rutgers Data Science Club Datathon",
+    title: "1st Place, Rutgers Data Science Club Datathon",
     rarity: "GOLD",
     when: "2024",
     detail: "Best Research.",
   },
   {
     id: "techstart",
-    title: "2nd Place — Rutgers TechStart",
+    title: "2nd Place, Rutgers TechStart",
     rarity: "SILVER",
     when: "Mar 2026",
     detail: "I pitched FleetSovereign via Road to Silicon V/Alley.",

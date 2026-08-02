@@ -30,7 +30,7 @@ export const EXPERIENCE: readonly HistoryEntry[] = [
     place: "Remote",
     bullets: [
       "I built a natural-language search interface for a grocery retail client: a FastAPI service that translates plain-English queries into parameterized SQL against a live PostgreSQL product database, with guardrails validating output for safety and schema correctness before execution.",
-      "I extended the pipeline with a threshold-driven automation layer: results checked against reorder levels trigger webhook and PostgreSQL alerts, scoped dynamically to user intent — 100+ queries/day at 90% accuracy.",
+      "I extended the pipeline with a threshold-driven automation layer: results checked against reorder levels trigger webhook and PostgreSQL alerts, scoped dynamically to user intent. It handles 100+ queries/day at 90% accuracy.",
       "I containerized the service with Docker and exposed REST endpoints for downstream integrations, and added structured logging and input sanitization against prompt injection and malformed SQL.",
     ],
     stats: ["100+ QUERIES / DAY", "90% ACCURACY"],
@@ -38,7 +38,7 @@ export const EXPERIENCE: readonly HistoryEntry[] = [
   },
   {
     id: "mbs-externship",
-    org: "Rutgers MBS Externship Exchange — New Castle Public Library",
+    org: "Rutgers MBS Externship Exchange, New Castle Public Library",
     role: "Lead Data Scientist Extern",
     period: "Jan – Apr 2024",
     place: "New Brunswick, NJ",
@@ -65,7 +65,7 @@ export const LEADERSHIP: readonly HistoryEntry[] = [
   },
   {
     id: "learning-assistant",
-    org: "Rutgers University — New Brunswick",
+    org: "Rutgers University, New Brunswick",
     role: "Learning Assistant, Precalculus",
     period: "Aug 2024 – May 2026",
     place: "New Brunswick, NJ",

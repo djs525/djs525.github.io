@@ -46,7 +46,7 @@ export default function Home() {
 
           <p className={styles.blurb}>
             I build products end to end. Every project here started as something
-            I wanted to exist, and I built every layer of it — the interface you
+            I wanted to exist, and I built every layer of it: the interface you
             touch, the service behind it, the data underneath, and the model
             that decides.
           </p>
