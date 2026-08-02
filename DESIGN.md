@@ -258,6 +258,13 @@ Rounded, small: 6px on tags and inline chips, 10px on rows and inputs, 16px on p
 - Right: the four stack strata as `role → part` pairs in label and measure type.
 - Hover fills the row Surface 2 to its full bleed and the trailing arrow travels 4px right. The whole row is one link target; the repository link sits outside it as a sibling.
 
+### Icons
+Drawn in the system's own grammar, not pulled from a library: 16px on a 16px grid, 1.4px strokes with round joins — the same hairline weight as everything else — and `currentColor` throughout, so one icon reads correctly on the ink-filled primary button and on the white secondary. They sit inside the button's line box with an 8px gap, never floating beside it.
+
+**The Real Logo Rule.** A third party's mark is reproduced as the real thing, at its own proportions, never restyled to match this system. A stylised redraw of someone else's logo loses the recognition that is the only reason to show a logo — and recognition is the point on an outbound link. GitHub's mark is the only one currently in use.
+
+Icons belong to studio. Arcade's rule is unchanged: every pictorial element there is a hand-authored pixel grid in `src/data/sprites.ts`, so an arcade button wanting an icon gets a drawn sprite, not one of these.
+
 ### Tags
 Surface 2 fill, Text 2 label, 6px radius, 4px/10px. Only applicable disciplines are shown — the studio world states what a project is rather than what it is not.
 

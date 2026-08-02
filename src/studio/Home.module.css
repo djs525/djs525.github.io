@@ -53,6 +53,20 @@
   margin-top: var(--s2);
 }
 
+/* Icon and label share a line box, so the pill's optical centre stays put and
+   the label does not shift when the icon renders. */
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.primary svg,
+.secondary svg {
+  flex: none;
+}
+
 .primary {
   padding: 11px 20px;
   border-radius: var(--r-pill);

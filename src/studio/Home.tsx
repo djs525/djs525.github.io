@@ -28,6 +28,7 @@ import { ROUTE_META } from "../data/meta";
 import { usePageMeta } from "../lib/usePageMeta";
 import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
+import { GitHubIcon, MailIcon } from "./Icons";
 import { Signature } from "./Signature";
 import { SectionHeading, Tags } from "./Parts";
 import styles from "./Home.module.css";
@@ -114,9 +115,11 @@ export default function Home() {
 
         <div className={styles.actions}>
           <a className={styles.primary} href={`mailto:${EMAIL}`}>
+            <MailIcon />
             Email me
           </a>
           <a className={styles.secondary} href="https://github.com/djs525">
+            <GitHubIcon />
             GitHub
           </a>
         </div>

@@ -15,7 +15,7 @@ import { useEffect } from "react";
  */
 
 const NAME = "Dev Shah";
-const HOME_TITLE = "Dev Shah — Software, data, product";
+const HOME_TITLE = "Dev Shah — Portfolio";
 
 function setDescription(content: string) {
   const tag = document.querySelector('meta[name="description"]');
