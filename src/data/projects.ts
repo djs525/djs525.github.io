@@ -51,10 +51,10 @@ export interface Project {
   readonly slug: string;
   readonly name: string;
   /**
-   * The roster preview line — the one sentence that makes someone open the
-   * unit. PLACEHOLDER: each of these currently repeats the project's own
-   * `problem` verbatim, so no unapproved claim has entered the file. Replace
-   * with purpose-written copy when Dev has drafted it.
+   * The index preview line: the one sentence that makes someone open the
+   * project. It must not restate `problem`, which is the first thing they
+   * read once they do. Every clause here is drawn from the approved fields
+   * below; nothing new is asserted.
    */
   readonly hook: string;
   readonly repo: string;
@@ -86,7 +86,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "brawlbot",
     name: "BrawlBot",
-    hook: "Brawl Stars players check their stats on dashboards, away from the chat where they actually talk about the game.",
+    hook: "A Discord bot that answers plain-English questions about any Brawl Stars account, driven by a Gemini tool-use agent over the live Supercell API.",
     repo: "djs525/brawlbot",
     sheet: "02",
     problem:
@@ -125,7 +125,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "gsd-ai",
     name: "GSD.AI",
-    hook: "Culinary entrepreneurs sign leases without knowing which cuisines a neighborhood already oversupplies, or whether a concept survives there.",
+    hook: "Maps which cuisines a New Jersey neighborhood already oversupplies, mined from thousands of Yelp reviews. First place at the Rutgers BITS × IBM Datathon.",
     repo: "djs525/bits-datathon",
     sheet: "03",
     problem:
@@ -145,7 +145,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "cortex",
     name: "Cortex",
-    hook: "A startup's weekly review means manually assembling deals, goals, investors, and hiring pipeline from scattered sources.",
+    hook: "Two words in Notion and Claude writes a startup's entire weekly review: health-scored, eight sections, no manual input.",
     repo: "djs525/cortex-startup-oi",
     sheet: "04",
     problem:
@@ -166,7 +166,7 @@ export const PROJECTS: readonly Project[] = [
   {
     slug: "f1-strategy-lab",
     name: "F1 Strategy Lab",
-    hook: "Fans argue pit strategy every race with no way to test whether the alternative call would have worked.",
+    hook: "Test the pit call the team did not make. An optimizer trained on 7+ years of telemetry ranks strategies by projected finish position.",
     repo: "djs525/f1-strategy-app",
     liveUrl: "https://f1-strategy.app",
     sheet: "05",
