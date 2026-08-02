@@ -28,8 +28,12 @@ import { UnitCard } from "../components/UnitCard";
 import { PROJECTS } from "../data/projects";
 import { SPRITE_PLAYER } from "../data/sprites";
 import styles from "./Home.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 export default function Home() {
+  usePageMeta(ROUTE_META.home);
+
   return (
     <Screen>
       <section className={styles.profile}>

@@ -5,6 +5,8 @@ import type { Interest } from "../data/about";
 import { SPRITE_CONTROLLER } from "../data/sprites";
 import { useReveal } from "../lib/useReveal";
 import styles from "./About.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 function Tile({ interest }: { readonly interest: Interest }) {
   const { ref, revealed } = useReveal<HTMLElement>();
@@ -22,6 +24,8 @@ function Tile({ interest }: { readonly interest: Interest }) {
 }
 
 export default function About() {
+  usePageMeta(ROUTE_META.about);
+
   return (
     <Screen>
       <Banner title="GET TO KNOW ME" count="Off the clock" />

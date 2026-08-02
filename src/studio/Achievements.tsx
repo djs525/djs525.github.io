@@ -5,6 +5,8 @@ import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./Parts";
 import styles from "./Achievements.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 function Row({
   item,
@@ -25,6 +27,8 @@ function Row({
 }
 
 export default function Achievements() {
+  usePageMeta(ROUTE_META.achievements);
+
   return (
     <Page>
       <section className={styles.section}>

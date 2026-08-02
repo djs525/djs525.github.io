@@ -6,6 +6,8 @@ import type { Achievement } from "../data/achievements";
 import { SPRITE_TROPHY } from "../data/sprites";
 import { useReveal } from "../lib/useReveal";
 import styles from "./Achievements.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 function Row({ item }: { readonly item: Achievement }) {
   const { ref, revealed } = useReveal<HTMLLIElement>();
@@ -28,6 +30,8 @@ function Row({ item }: { readonly item: Achievement }) {
 }
 
 export default function Achievements() {
+  usePageMeta(ROUTE_META.achievements);
+
   return (
     <Screen>
       <Banner title="ACHIEVEMENTS" count={`${ACHIEVEMENTS.length} unlocked`} />

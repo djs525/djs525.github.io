@@ -4,6 +4,8 @@ import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./Parts";
 import styles from "./About.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 function Tile({
   interest,
@@ -22,6 +24,8 @@ function Tile({
 }
 
 export default function About() {
+  usePageMeta(ROUTE_META.about);
+
   return (
     <Page>
       <section className={styles.section}>

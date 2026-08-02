@@ -297,6 +297,8 @@ The theme is a first-class piece of state, not a CSS filter.
 - The choice persists in `localStorage` under `theme`. `studio` is the default for a visitor with no stored choice.
 - Each world renders its **own component tree**. The studio world reuses no arcade component, module, or token — this is a hard rule, not a preference, and a shared "themed" component that branches on `data-theme` is a violation of it. Data, routing, and behavioral hooks are shared; presentation is not.
 - Fonts are loaded per world through a single swapped `<link>`, so a studio visitor never downloads the arcade faces.
+- **The favicon swaps with the world too.** Studio's is the wordmark's initials in a grotesk, ink on ink-dark — the signature is unreadable at 16px, so the mark falls back to the register the header already uses. Arcade's is frame one of the player sprite from `src/data/sprites.ts`, which is a 16×16 grid and therefore already exactly a favicon; regenerate it if that sprite changes. Both are SVG, swapped on one `<link id="favicon">` by the same code that swaps the fonts.
+- **Titles and descriptions are shared, in the neutral vocabulary.** A tab label is metadata about the page, not part of a visual world, and a history entry reading "Roster" helps nobody find their way back. Crawlers and link unfurlers do not run the bundle, so the card they read is the static one in `index.html` — one per site, not per route.
 
 ## Do's and Don'ts (studio)
 

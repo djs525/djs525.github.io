@@ -24,6 +24,8 @@
 
 import { Link } from "react-router-dom";
 import { PROJECTS, type Project } from "../data/projects";
+import { ROUTE_META } from "../data/meta";
+import { usePageMeta } from "../lib/usePageMeta";
 import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
 import { Signature } from "./Signature";
@@ -79,6 +81,8 @@ function ProjectRow({
 }
 
 export default function Home() {
+  usePageMeta(ROUTE_META.home);
+
   return (
     <Page>
       {/* Not wrapped in Reveal: the hero is above the fold and the signature is

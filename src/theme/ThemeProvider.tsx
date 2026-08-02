@@ -10,6 +10,7 @@ import {
 import {
   DEFAULT_THEME,
   THEME_FONTS,
+  THEME_ICONS,
   THEME_STORAGE_KEY,
   readStoredTheme,
   type Theme,
@@ -23,6 +24,12 @@ interface ThemeState {
 const ThemeContext = createContext<ThemeState | null>(null);
 
 const FONT_LINK_ID = "theme-fonts";
+const ICON_LINK_ID = "favicon";
+
+function swapLink(id: string, href: string) {
+  const link = document.getElementById(id);
+  if (link instanceof HTMLLinkElement && link.href !== href) link.href = href;
+}
 
 /**
  * Owns which world is on screen.
@@ -41,12 +48,8 @@ export function ThemeProvider({ children }: { readonly children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dataset["theme"] = theme;
-
-    const link = document.getElementById(FONT_LINK_ID);
-    if (link instanceof HTMLLinkElement) {
-      const href = THEME_FONTS[theme];
-      if (link.href !== href) link.href = href;
-    }
+    swapLink(FONT_LINK_ID, THEME_FONTS[theme]);
+    swapLink(ICON_LINK_ID, THEME_ICONS[theme]);
   }, [theme]);
 
   const setTheme = useCallback((next: Theme) => {

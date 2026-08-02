@@ -6,7 +6,43 @@
     <title>Dev Shah — Software, data, product</title>
     <meta
       name="description"
+      content="I build products end to end — the interface you touch, the service behind it, the data underneath, and the model that decides. Four projects, each written up in full."
+    />
+    <link rel="canonical" href="https://djs525.github.io/" />
+
+    <!--
+      Crawlers and link unfurlers do not run the bundle, so these are the tags
+      they read: one card for the whole site. Per-route cards would need
+      prerendering, which this static build deliberately does not do.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Dev Shah" />
+    <meta property="og:url" content="https://djs525.github.io/" />
+    <meta property="og:title" content="Dev Shah — Software, data, product" />
+    <meta
+      property="og:description"
       content="I build products end to end — interface, service, data, model. Four projects, each written up in full."
+    />
+    <meta property="og:image" content="https://djs525.github.io/og.png" />
+    <meta property="og:image:width" content="2400" />
+    <meta property="og:image:height" content="1260" />
+    <meta
+      property="og:image:alt"
+      content="Dev Shah, signed in a fountain-pen script, above the line: I build products end to end — interface, service, data, model."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dev Shah — Software, data, product" />
+    <meta
+      name="twitter:description"
+      content="I build products end to end — interface, service, data, model. Four projects, each written up in full."
+    />
+    <meta name="twitter:image" content="https://djs525.github.io/og.png" />
+
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +59,9 @@
     -->
     <script>
       (function () {
-        var STUDIO_FONTS = document.getElementById("theme-fonts").href;
+        var fonts = document.getElementById("theme-fonts");
+        var icon = document.getElementById("favicon");
+        var STUDIO_FONTS = fonts.href;
         var ARCADE_FONTS =
           "https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@500;600;700;800&display=swap";
         var theme = "studio";
@@ -34,8 +72,12 @@
           /* storage unavailable — the default is a complete answer */
         }
         document.documentElement.setAttribute("data-theme", theme);
-        document.getElementById("theme-fonts").href =
-          theme === "arcade" ? ARCADE_FONTS : STUDIO_FONTS;
+        if (theme === "arcade") {
+          fonts.href = ARCADE_FONTS;
+          icon.href = "/favicon-arcade.svg";
+        } else {
+          fonts.href = STUDIO_FONTS;
+        }
       })();
     </script>
   </head>

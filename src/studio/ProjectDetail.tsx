@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { PRACTICE_STACK, PROJECTS } from "../data/projects";
 import { useLiveStats } from "../lib/useLiveStats";
@@ -6,6 +5,8 @@ import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
 import { LiveValue, SectionHeading, StatGrid, Tags } from "./Parts";
 import styles from "./ProjectDetail.module.css";
+import { usePageMeta } from "../lib/usePageMeta";
+import { ROUTE_META } from "../data/meta";
 
 /**
  * One project, in full. The index carries four hooks; the write-up, the four
@@ -20,14 +21,11 @@ export default function ProjectDetail() {
   // hooks by call order, so none of them may sit behind a conditional return.
   const stats = useLiveStats(project?.repo);
 
-  useEffect(() => {
-    if (!project) return;
-    const previous = document.title;
-    document.title = `${project.name} · Dev Shah`;
-    return () => {
-      document.title = previous;
-    };
-  }, [project]);
+  // Runs unconditionally, before the guard below, like every other hook here.
+  usePageMeta({
+    title: project?.name ?? "Projects",
+    description: project?.hook ?? ROUTE_META.home.description,
+  });
 
   if (!project) return <Navigate to="/" replace />;
 

@@ -29,6 +29,17 @@ export const THEME_FONTS: Readonly<Record<Theme, string>> = {
     "https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@500;600;700;800&display=swap",
 };
 
+/**
+ * One favicon per world. Studio is the wordmark's initials; arcade is frame
+ * one of the player sprite, which is a 16×16 grid and therefore already
+ * exactly a favicon. Generated from `src/data/sprites.ts` — regenerate it if
+ * that sprite changes.
+ */
+export const THEME_ICONS: Readonly<Record<Theme, string>> = {
+  studio: "/favicon.svg",
+  arcade: "/favicon-arcade.svg",
+};
+
 export function isTheme(value: unknown): value is Theme {
   return value === "studio" || value === "arcade";
 }
