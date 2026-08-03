@@ -76,6 +76,12 @@
   --display-weight: 500;
   --display-tracking: -0.035em;
 
+  /* --- Skip link: shared markup, per-world appearance ------------------- */
+  --skip-bg: var(--surface);
+  --skip-fg: var(--ink);
+  --skip-border: 1px solid var(--line-strong);
+  --skip-radius: var(--r-pill);
+
   /* --- Focus ----------------------------------------------------------- */
   --focus-ring: 2px;
   --focus-color: var(--ink);

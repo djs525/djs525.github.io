@@ -39,10 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           # Restores ~/.npm between runs, keyed on package-lock.json.
@@ -66,7 +66,7 @@ jobs:
           VITE_API_BASE: ${{ vars.VITE_API_BASE }}
 
       - name: Upload dist/ as the Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -79,4 +79,4 @@ jobs:
     steps:
       - name: Publish to Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

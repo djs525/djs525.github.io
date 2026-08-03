@@ -60,6 +60,38 @@ button {
   cursor: pointer;
 }
 
+/*
+ * Seven tab stops separate the top of the page from its content, on every
+ * route. This is the way past them. Off-screen until focused, then it is the
+ * first thing on the page.
+ */
+.skip-link {
+  position: fixed;
+  top: var(--s2);
+  left: var(--s2);
+  z-index: 100;
+  padding: 10px 18px;
+  background: var(--skip-bg);
+  color: var(--skip-fg);
+  border: var(--skip-border);
+  border-radius: var(--skip-radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--s5)));
+  transition: transform var(--t-fast) ease;
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

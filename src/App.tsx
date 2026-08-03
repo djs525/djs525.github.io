@@ -80,6 +80,11 @@ export default function App() {
 
   return (
     <>
+      {/* World-neutral: both trees render a <main id="content">, and each
+          theme file says what this looks like in its own vocabulary. */}
+      <a className="skip-link" href="#content">
+        Skip to content
+      </a>
       <ScrollToTop />
       {theme === "arcade" ? <ArcadeApp /> : <StudioApp />}
     </>

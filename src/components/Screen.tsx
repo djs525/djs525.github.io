@@ -2,7 +2,11 @@ import type { ReactNode } from "react";
 import styles from "./Screen.module.css";
 
 export function Screen({ children }: { readonly children: ReactNode }) {
-  return <main className={styles.page}>{children}</main>;
+  return (
+    <main id="content" tabIndex={-1} className={styles.page}>
+      {children}
+    </main>
+  );
 }
 
 interface BannerProps {

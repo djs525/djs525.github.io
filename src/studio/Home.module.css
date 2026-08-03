@@ -165,6 +165,31 @@
   text-decoration: none;
 }
 
+/*
+ * The whole row is the click target, so the whole row is what the focus ring
+ * must describe. Left alone, the ring draws around the words "BrawlBot" while
+ * the active area extends far past them.
+ *
+ * Guarded: without :has() support the link keeps its own ring, which is worse
+ * placed but never absent.
+ */
+@supports selector(:has(*)) {
+  .row:has(.rowLink:focus-visible) {
+    background: var(--surface-2);
+    outline: var(--focus-ring) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+  }
+
+  .row:has(.rowLink:focus-visible) .rowArrow {
+    transform: translateX(4px);
+    color: var(--text);
+  }
+
+  .rowLink:focus-visible {
+    outline: none;
+  }
+}
+
 /* The row, not just the title, is the target. */
 .rowLink::after {
   content: "";

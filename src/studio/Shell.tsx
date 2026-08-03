@@ -97,7 +97,9 @@ export function Shell({ children }: { readonly children: ReactNode }) {
   return (
     <div className={styles.shell}>
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main id="content" tabIndex={-1} className={styles.main}>
+        {children}
+      </main>
       <Footer />
     </div>
   );
