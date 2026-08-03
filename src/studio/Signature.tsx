@@ -1,23 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import {
+  PEN_WIDTH,
+  SIGNATURE_GLYPH,
+  SIGNATURE_ROUTE,
+  SIGNATURE_VIEWBOX,
+} from "./signature-path";
 import styles from "./Signature.module.css";
 
 /** Once per tab. A route change back to home must not re-sign the page. */
 const SESSION_KEY = "signature-written";
 
 /**
- * The site's one authored moment: the name inks itself in, left to right, at
- * the pace of a hand rather than a machine — the keyframes carry an uneven
- * rhythm and a beat where the pen lifts between the two words.
+ * The site's one authored moment: the name writes itself.
+ *
+ * A pen travels SIGNATURE_ROUTE, the path a hand actually takes through the
+ * letters, and the ink it lays down is clipped to the letterforms. So the
+ * strokes arrive in writing order, including the vertical excursions into the
+ * D's stem and the ascenders, and the lift between the two words. Progress is
+ * stroke-dashoffset along that route, which is why this reads as writing
+ * rather than as a reveal: the earlier version slid a soft-edged mask across
+ * the word left to right, and a soft edge moving in one direction is a fade.
  *
  * The hand stays afterwards. This is a signature, not an intro effect that
  * hands back to the interface font.
  *
- * Three states, and the page is complete in all of them:
- *   waiting  — inked but masked, held only while the face loads
- *   writing  — the mask sweeps
- *   written  — the mask is removed entirely, so nothing composites afterwards
+ * Three states, and the name is complete in all of them:
+ *   idle     — nothing drawn yet, held for one frame
+ *   writing  — the pen travels
+ *   written  — the plain filled outline, no clip, no stroke, nothing animating
  */
-type Phase = "waiting" | "writing" | "written";
+type Phase = "idle" | "writing" | "written";
 
 function alreadyWritten(): boolean {
   try {
@@ -32,25 +44,18 @@ function prefersReducedMotion(): boolean {
 }
 
 export function Signature({ children }: { readonly children: string }) {
+  const clipId = `sig-${useId().replace(/:/g, "")}`;
   const [phase, setPhase] = useState<Phase>(() =>
     typeof window === "undefined" || alreadyWritten() || prefersReducedMotion()
       ? "written"
-      : "waiting",
+      : "idle",
   );
 
   useEffect(() => {
-    if (phase !== "waiting") return;
-
-    let live = true;
-
-    // Writing in the fallback face and then swapping to the real one would
-    // reflow mid-stroke. Wait for the face — but never on it: a font service
-    // that hangs must not leave the name masked out.
-    const ready = document.fonts?.ready ?? Promise.resolve();
-    const timeout = new Promise((resolve) => window.setTimeout(resolve, 600));
-
-    void Promise.race([ready, timeout]).then(() => {
-      if (!live) return;
+    if (phase !== "idle") return;
+    // One frame of idle, so the browser has the un-drawn state to animate
+    // from. No font to wait for: the name is geometry, not type.
+    const frame = requestAnimationFrame(() => {
       setPhase("writing");
       try {
         window.sessionStorage.setItem(SESSION_KEY, "1");
@@ -58,18 +63,46 @@ export function Signature({ children }: { readonly children: string }) {
         // Storage refused: the name simply signs itself again next route.
       }
     });
-
-    return () => {
-      live = false;
-    };
+    return () => cancelAnimationFrame(frame);
   }, [phase]);
 
   return (
-    <h1
-      className={`${styles.signature} ${styles[phase]}`}
-      onAnimationEnd={() => setPhase("written")}
-    >
-      {children}
+    <h1 className={styles.signature}>
+      {/* The accessible name. The drawing is decorative by definition. */}
+      <span className="visually-hidden">{children}</span>
+
+      <svg
+        className={styles.canvas}
+        viewBox={SIGNATURE_VIEWBOX}
+        role="presentation"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {phase === "written" ? (
+          <path d={SIGNATURE_GLYPH} fill="currentColor" />
+        ) : (
+          <>
+            <defs>
+              <clipPath id={clipId}>
+                <path d={SIGNATURE_GLYPH} />
+              </clipPath>
+            </defs>
+            <g clipPath={`url(#${clipId})`}>
+              <path
+                className={`${styles.pen} ${phase === "writing" ? styles.writing : ""}`}
+                d={SIGNATURE_ROUTE}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={PEN_WIDTH}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                pathLength={1}
+                onAnimationEnd={() => setPhase("written")}
+              />
+            </g>
+          </>
+        )}
+      </svg>
     </h1>
   );
 }

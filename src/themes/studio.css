@@ -65,10 +65,6 @@
     sans-serif;
   --font-display: var(--font-ui);
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono", monospace;
-  /* One documented exception to the single-family rule: the name is a
-     signature, and a signature is written by hand. Used on Dev's name and
-     nothing else. */
-  --font-signature: "Ms Madi", cursive;
   --body-size: 17px;
   --body-weight: 400;
   --body-leading: 1.6;

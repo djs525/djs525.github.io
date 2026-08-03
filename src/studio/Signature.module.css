@@ -1,105 +1,80 @@
+/* An inline SVG has no intrinsic width, so as a flex item the heading would
+   collapse to whatever the browser guesses. The heading owns the width and
+   the drawing fills it; height follows from the viewBox aspect. */
 .signature {
-  font-family: var(--font-signature);
-  /* Ms Madi has a small x-height for its em, so it needs a larger size than
-     the grotesk display step to hold the same optical weight. */
-  font-size: clamp(3.6rem, 9.5vw, 6rem);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: 0;
+  display: block;
+  width: min(100%, 30rem);
+  margin-left: -0.01em;
   color: var(--text);
-  /* Descenders and the trailing flourish sit below the baseline; without this
-     the mask and the layout both clip them. */
-  padding: 0.06em 0.08em 0.18em 0;
-  margin-left: -0.02em;
+  /* The h1 no longer sets type: the name is geometry. Height comes from the
+     SVG's own aspect ratio. */
+  line-height: 0;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
 /*
- * The reveal is a soft-edged gradient wider than the element, slid across it.
- * A hard edge reads as a wipe; the 8% ramp reads as ink arriving.
+ * Progress is distance travelled along the route. pathLength normalises it to
+ * 1, so the dash maths is independent of the path's real length.
  */
-.waiting,
-.writing {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 46%,
-    rgba(0, 0, 0, 0.4) 50%,
-    transparent 54%
-  );
-  mask-image: linear-gradient(
-    to right,
-    #000 46%,
-    rgba(0, 0, 0, 0.4) 50%,
-    transparent 54%
-  );
-  -webkit-mask-size: 220% 100%;
-  mask-size: 220% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: 100% 0;
-  mask-position: 100% 0;
+.pen {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
 }
 
 .writing {
-  will-change: mask-position;
-  animation: write 1400ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
-}
-
-/* Mask removed outright once the name is signed — nothing left compositing. */
-.written {
-  -webkit-mask-image: none;
-  mask-image: none;
+  /* linear, not the system ease: a timing function applies between every
+     keyframe pair, so an ease-out would race ahead inside each segment and
+     compound across eight of them. The stops below carry the rhythm. */
+  animation: write 2200ms linear forwards;
 }
 
 /*
- * The stops are deliberately uneven. A linear sweep reads as a machine; a hand
- * accelerates through a stroke, slows into a join, and lifts between words —
- * the near-flat segment from 30% to 38% is that lift, landing in the gap
- * between "Dev" and "Shah".
+ * The stops are uneven on purpose. A hand accelerates through a long stroke
+ * and slows into a join, and it pauses when it lifts. The flat run from 42%
+ * to 50% is that lift, crossing the gap between "Dev" and "Shah"; the route
+ * arcs above the cap line there, where the clip discards it.
  */
 @keyframes write {
   0% {
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
+    stroke-dashoffset: 1;
   }
-  14% {
-    -webkit-mask-position: 83% 0;
-    mask-position: 83% 0;
+  16% {
+    stroke-dashoffset: 0.83;
   }
   30% {
-    -webkit-mask-position: 61% 0;
-    mask-position: 61% 0;
+    stroke-dashoffset: 0.66;
   }
-  38% {
-    -webkit-mask-position: 57% 0;
-    mask-position: 57% 0;
+  42% {
+    stroke-dashoffset: 0.56;
   }
-  56% {
-    -webkit-mask-position: 37% 0;
-    mask-position: 37% 0;
+  50% {
+    stroke-dashoffset: 0.53;
   }
-  74% {
-    -webkit-mask-position: 19% 0;
-    mask-position: 19% 0;
+  66% {
+    stroke-dashoffset: 0.34;
   }
-  88% {
-    -webkit-mask-position: 8% 0;
-    mask-position: 8% 0;
+  82% {
+    stroke-dashoffset: 0.16;
   }
   100% {
-    -webkit-mask-position: 0% 0;
-    mask-position: 0% 0;
+    stroke-dashoffset: 0;
   }
 }
 
-/* Signed already, no stroke. The component resolves to `written` on its own
-   under reduced motion; this is the belt-and-braces for a preference that
-   changes mid-visit. */
+/*
+ * Already signed, no stroke. The component resolves to `written` on its own
+ * under reduced motion; this is the belt-and-braces for a preference that
+ * changes mid-visit.
+ */
 @media (prefers-reduced-motion: reduce) {
-  .waiting,
   .writing {
-    -webkit-mask-image: none;
-    mask-image: none;
     animation: none;
-    will-change: auto;
+    stroke-dashoffset: 0;
   }
 }
