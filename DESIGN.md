@@ -24,8 +24,11 @@ typography:
     lineHeight: 1.04
     letterSpacing: '-0.035em'
   signature:
-    note: 'Not type. Ms Madi outlines, baked to SVG path data; sized by width, not font-size.'
-    width: 'min(100%, 30rem)'
+    fontFamily: "'Ms Madi', cursive"
+    fontSize: 'clamp(3.6rem, 9.5vw, 6rem)'
+    fontWeight: 400
+    lineHeight: 1.05
+    letterSpacing: '0'
   page-title:
     fontFamily: "'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif"
     fontSize: 'clamp(2rem, 4vw, 2.75rem)'
@@ -198,9 +201,9 @@ When the API has not answered, the slot reads `Not available` in Text 3, in the 
 
 ## Typography
 
-**Family:** Schibsted Grotesk for everything — display, headline, body, label. **Geist Mono** for measured values only. There is no third face.
+**Family:** Schibsted Grotesk for everything — display, headline, body, label. **Geist Mono** for measured values only. **Ms Madi** for Dev's name on home, and nothing else.
 
-**The Signature Exception.** The name on home is a signature, because a name at the head of a document is signed rather than typeset. Its letterforms are Ms Madi, a connected fountain-pen script, but they are **not type**: the word is baked to SVG outlines in `src/studio/signature-path.ts` and no webfont is loaded for it. So it draws identically on first paint, with no request and no flash of a fallback hand, and it cannot be reused — there is no face to set anything else in. That is the exception enforcing itself.
+**The Signature Exception.** The system is one grotesk plus a measurement mono. The single documented exception is the name on home, which is set as a signature in Ms Madi — a connected fountain-pen script — because a name at the head of a document is signed, not typeset. It is the only handwritten mark in the system: not on the header wordmark (illegible at 15px), not on page titles, not on project names, not as a decorative accent anywhere. A second use of this face breaks the exception and makes it a theme.
 
 **Character:** one neutral grotesk with slightly open apertures, used across a wide scale so hierarchy comes from size and weight rather than from a second personality. Display sizes are set tight (-0.035em) and at weight 500 rather than 700: confidence without shouting.
 
@@ -285,13 +288,7 @@ Two hairline-divided bands. The first is contact and repository links. The secon
 
 ## Motion
 
-**The focal moment: the name writes itself.** On the first load of a tab, a pen travels the path a hand actually takes through the letters — down the D's stem, round its bowl, through "ev", a lift above the cap line, then "hah" — and the ink it lays is clipped to the letterforms. Progress is `stroke-dashoffset` along that route over 2200ms.
-
-That is why it reads as writing. The first version slid a soft-edged mask across the word left to right, and **a soft edge moving in one direction is a fade**: it cannot put the ascenders on before the letters beneath them, and it has no idea where the pen lifts. Following the route does both for free.
-
-Two things the technique demands. The route is **one continuous subpath**, because SVG restarts a dash pattern at every subpath and a second one draws both words simultaneously. And the pen is **170 units wide**, which is not a look but a measurement: the narrowest width at which the stroke, once clipped, leaves no part of the outline uninked. The route only has to visit each letter in the right order; the clip supplies the shape.
-
-The animation runs **linear**, with the rhythm carried by uneven keyframe stops. A timing function applies between every keyframe pair, so an ease would race ahead inside each of the eight segments and compound. The flat run from 42% to 50% is the pen lift between the two words.
+**The focal moment: the name signs itself.** On the first load of a tab, Ms Madi's connected script inks in left to right over 1400ms behind a soft-edged mask — a 220%-wide gradient with an 8% ramp, slid across the element, so ink *arrives* rather than being wiped in. The keyframe stops are deliberately uneven: a hand accelerates through a stroke, slows into a join, and lifts between words, and the near-flat 30%→38% segment is that lift, landing in the gap between "Dev" and "Shah". A linear sweep here reads as a machine and is the failure mode to avoid.
 
 Rules that make it a signature rather than an intro effect:
 - **The hand stays.** The name does not revert to the grotesk when the stroke finishes.
@@ -312,7 +309,7 @@ The theme is a first-class piece of state, not a CSS filter.
 - `data-theme="studio" | "arcade"` on `<html>` selects the token set; each world's tokens live in its own file and neither leaks into the other.
 - The choice persists in `localStorage` under `theme`. `studio` is the default for a visitor with no stored choice.
 - Each world renders its **own component tree**. The studio world reuses no arcade component, module, or token — this is a hard rule, not a preference, and a shared "themed" component that branches on `data-theme` is a violation of it. Data, routing, and behavioral hooks are shared; presentation is not.
-- Fonts are loaded per world through a single swapped `<link>`, so a studio visitor never downloads the arcade faces. Studio loads two families, not three: the signature is geometry.
+- Fonts are loaded per world through a single swapped `<link>`, so a studio visitor never downloads the arcade faces.
 - **The favicon swaps with the world too.** Studio's is the wordmark's initials in a grotesk, ink on ink-dark — the signature is unreadable at 16px, so the mark falls back to the register the header already uses. Arcade's is frame one of the player sprite from `src/data/sprites.ts`, which is a 16×16 grid and therefore already exactly a favicon; regenerate it if that sprite changes. Both are SVG, swapped on one `<link id="favicon">` by the same code that swaps the fonts.
 - **Titles and descriptions are shared, in the neutral vocabulary.** A tab label is metadata about the page, not part of a visual world, and a history entry reading "Roster" helps nobody find their way back. Crawlers and link unfurlers do not run the bundle, so the card they read is the static one in `index.html` — one per site, not per route.
 
