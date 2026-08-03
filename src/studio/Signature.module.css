@@ -28,43 +28,47 @@
 }
 
 .writing {
-  /* linear, not the system ease: a timing function applies between every
-     keyframe pair, so an ease-out would race ahead inside each segment and
-     compound across eight of them. The stops below carry the rhythm. */
+  /* linear, and it has to be: the stops below already encode the pacing, and
+     a timing function would apply between every pair of them and undo it. */
   animation: write 2200ms linear forwards;
 }
 
 /*
- * The stops are uneven on purpose. A hand accelerates through a long stroke
- * and slows into a join, and it pauses when it lifts. The flat run from 42%
- * to 50% is that lift, crossing the gap between "Dev" and "Shah"; the route
- * arcs above the cap line there, where the clip discards it.
+ * These stops are measured, not designed.
+ *
+ * Distance along the route is not the same as ink appearing. Long stretches
+ * of it pass through the D's bowl interior, the lift between the words, and
+ * areas already inked, revealing nothing; and because the pen is far wider
+ * than a stroke, crossing one dumps a large piece at once. Advancing the dash
+ * at a constant rate therefore produced dump, freeze, dump, freeze: 18% of the
+ * signature in the first 4% of the duration, then 5% over the next 16%.
+ *
+ * So the reveal was sampled at 160 points, the inked area measured at each,
+ * and that curve inverted: every 5% of time below lands another 5% of ink.
+ * Regenerate with scripts/signature-timing.mjs if the route or pen changes.
  */
 @keyframes write {
-  0% {
-    stroke-dashoffset: 1;
-  }
-  16% {
-    stroke-dashoffset: 0.83;
-  }
-  30% {
-    stroke-dashoffset: 0.66;
-  }
-  42% {
-    stroke-dashoffset: 0.56;
-  }
-  50% {
-    stroke-dashoffset: 0.53;
-  }
-  66% {
-    stroke-dashoffset: 0.34;
-  }
-  82% {
-    stroke-dashoffset: 0.16;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
+  0% { stroke-dashoffset: 1; }
+  5% { stroke-dashoffset: 0.9954; }
+  10% { stroke-dashoffset: 0.98; }
+  15% { stroke-dashoffset: 0.9656; }
+  20% { stroke-dashoffset: 0.9078; }
+  25% { stroke-dashoffset: 0.7894; }
+  30% { stroke-dashoffset: 0.7755; }
+  35% { stroke-dashoffset: 0.7215; }
+  40% { stroke-dashoffset: 0.662; }
+  45% { stroke-dashoffset: 0.5757; }
+  50% { stroke-dashoffset: 0.5336; }
+  55% { stroke-dashoffset: 0.5126; }
+  60% { stroke-dashoffset: 0.4212; }
+  65% { stroke-dashoffset: 0.3863; }
+  70% { stroke-dashoffset: 0.365; }
+  75% { stroke-dashoffset: 0.2395; }
+  80% { stroke-dashoffset: 0.197; }
+  85% { stroke-dashoffset: 0.1694; }
+  90% { stroke-dashoffset: 0.136; }
+  95% { stroke-dashoffset: 0.1159; }
+  100% { stroke-dashoffset: 0; }
 }
 
 /*
