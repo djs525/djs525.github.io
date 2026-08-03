@@ -75,7 +75,7 @@ button {
   color: var(--skip-fg);
   border: var(--skip-border);
   border-radius: var(--skip-radius);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
   transform: translateY(calc(-100% - var(--s5)));
