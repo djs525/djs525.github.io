@@ -26,3 +26,8 @@ src/**/exercise-*
 # covers worker/node_modules at any depth.
 worker/.wrangler/
 worker/.dev.vars
+
+# Scratch work that is not part of the site. Kept on disk because that is
+# where it is convenient to try things, and out of git because a repo
+# recruiters open should contain the site and nothing else.
+experiments/
