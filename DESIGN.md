@@ -265,7 +265,7 @@ Rounded, small: 6px on tags and inline chips, 10px on rows and inputs, 16px on p
 ### Icons
 Drawn in the system's own grammar, not pulled from a library: 16px on a 16px grid, 1.4px strokes with round joins — the same hairline weight as everything else — and `currentColor` throughout, so one icon reads correctly on the ink-filled primary button and on the white secondary. They sit inside the button's line box with an 8px gap, never floating beside it.
 
-**The Real Logo Rule.** A third party's mark is reproduced as the real thing, at its own proportions, never restyled to match this system. A stylised redraw of someone else's logo loses the recognition that is the only reason to show a logo — and recognition is the point on an outbound link. GitHub's mark is the only one currently in use.
+**The Real Logo Rule.** A third party's mark is reproduced as the real thing, at its own proportions, never restyled to match this system. A stylised redraw of someone else's logo loses the recognition that is the only reason to show a logo, and recognition is the point on an outbound link. GitHub's and LinkedIn's marks are the two in use; both take `currentColor`, so each renders correctly on the ink primary and the white secondary without a second copy.
 
 Icons belong to studio. Arcade's rule is unchanged: every pictorial element there is a hand-authored pixel grid in `src/data/sprites.ts`, so an arcade button wanting an icon gets a drawn sprite, not one of these.
 
@@ -282,6 +282,8 @@ Label in Text 3, value in Geist Mono at 1.125rem in Text, stacked, laid out in a
 
 ### Header
 Sticky, Ground at 88% with a 12px backdrop blur, hairline beneath. Wordmark left (name in 500 plus a Text 3 role line), route links centre-right at label scale, primary action far right. The active route carries a 2px Text underline sitting on the header's own hairline; inactive links are Text 2 and darken on hover.
+
+**Email is the standing action and never drops out.** It sits in the header on every route, at every width, which is what frees the home hero to spend its two slots on places the work can be checked rather than on a second contact link. Below 720px the header becomes a two-row grid — wordmark and action on the first, the nav rail on the second — and the Text 3 role line is what gives way, not the action.
 
 ### Footer
 Two hairline-divided bands. The first is contact and repository links. The second is the arcade invitation — a short hook in full Text ink, its explanation in Text 2, and a quiet secondary button — placed last on the page, after every piece of work has had its chance. It is written as an offer, not as a settings toggle: the label names the experience ("Play the arcade version"), never the mechanism ("Switch theme").

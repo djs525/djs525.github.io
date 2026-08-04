@@ -13,9 +13,9 @@
  * STORY: A recruiter learns who this is in one viewport, reads four project
  * names and hooks in the next, and opens the one that matches their role.
  *
- * FIRST VIEWPORT: Sticky hairline header. Name at display scale, the
- * end-to-end claim beneath it at 68ch, three credentials on a hairline rail,
- * then the primary action — email — with the repository link beside it.
+ * FIRST VIEWPORT: Sticky hairline header carrying email on every route. Name
+ * at display scale, the end-to-end claim beneath it at 68ch, three credentials
+ * on a hairline rail, then two actions: LinkedIn, then GitHub.
  *
  * FORM: Canon, taken as the standing exit over a direction roll (seed
  * 8835ba75) and pinned by Dev; craft bar named as Notion, colours and shapes
@@ -28,12 +28,12 @@ import { ROUTE_META } from "../data/meta";
 import { usePageMeta } from "../lib/usePageMeta";
 import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
-import { GitHubIcon, MailIcon } from "./Icons";
+import { GitHubIcon, LinkedInIcon } from "./Icons";
 import { Signature } from "./Signature";
 import { SectionHeading, Tags } from "./Parts";
 import styles from "./Home.module.css";
 
-const EMAIL = "djshah2903@gmail.com";
+const LINKEDIN = "https://www.linkedin.com/in/djs29";
 
 function ProjectRow({
   project,
@@ -120,10 +120,12 @@ export default function Home() {
           </li>
         </ul>
 
+        {/* Email lives in the header, on every route. The hero spends its two
+            slots on the places the work can be checked instead. */}
         <div className={styles.actions}>
-          <a className={styles.primary} href={`mailto:${EMAIL}`}>
-            <MailIcon />
-            Email me
+          <a className={styles.primary} href={LINKEDIN}>
+            <LinkedInIcon />
+            LinkedIn
           </a>
           <a className={styles.secondary} href="https://github.com/djs525">
             <GitHubIcon />
