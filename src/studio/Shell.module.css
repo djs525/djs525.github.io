@@ -4,6 +4,15 @@
   min-height: 100vh;
 }
 
+/* One pixel of nothing at the very top of the document. While it is on screen
+   the page has not been scrolled; the moment it leaves, the header has content
+   behind it and earns its shadow. An observer rather than a scroll handler, so
+   nothing runs on the scroll thread. */
+.sentinel {
+  height: 1px;
+  margin-bottom: -1px;
+}
+
 /* --- Header ------------------------------------------------------------ */
 
 .header {
@@ -14,6 +23,13 @@
   backdrop-filter: saturate(1.6) blur(12px);
   -webkit-backdrop-filter: saturate(1.6) blur(12px);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow var(--t-mid) var(--ease);
+}
+
+/* Depth only once there is something underneath to be above. At the top of the
+   page the header is part of the paper; scrolled, it is a thing lying on it. */
+.header[data-scrolled="true"] {
+  box-shadow: var(--shadow-rest);
 }
 
 .headerInner {

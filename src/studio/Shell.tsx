@@ -1,4 +1,10 @@
-import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../theme/ThemeProvider";
 import styles from "./Shell.module.css";
@@ -109,11 +115,35 @@ function useSlingshotIndicator() {
   return { navRef, ruleRef };
 }
 
-function Header() {
+/**
+ * Flips `data-scrolled` on the header the moment the top of the document
+ * leaves the viewport. Returns the ref for the header and the one for the 1px
+ * sentinel that has to sit above it in the flow.
+ */
+function useScrolledHeader() {
+  const headerRef = useRef<HTMLElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const sentinel = sentinelRef.current;
+    if (!header || !sentinel) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      header.dataset["scrolled"] = String(!entry?.isIntersecting);
+    });
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, []);
+
+  return { headerRef, sentinelRef };
+}
+
+function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | null> }) {
   const { navRef, ruleRef } = useSlingshotIndicator();
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <div className={styles.headerInner}>
         <Link className={styles.wordmark} to="/">
           <span className={styles.wordmarkName}>Dev Shah</span>
@@ -192,9 +222,12 @@ function Footer() {
 }
 
 export function Shell({ children }: { readonly children: ReactNode }) {
+  const { headerRef, sentinelRef } = useScrolledHeader();
+
   return (
     <div className={styles.shell}>
-      <Header />
+      <div className={styles.sentinel} ref={sentinelRef} aria-hidden="true" />
+      <Header headerRef={headerRef} />
       <main id="content" tabIndex={-1} className={styles.main}>
         {children}
       </main>
