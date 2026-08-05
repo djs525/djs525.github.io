@@ -47,6 +47,7 @@
 }
 
 .nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--s5);
@@ -77,18 +78,25 @@
   color: var(--text);
 }
 
-/* The active marker sits on the header's own hairline rather than floating
-   above it, so the two rules read as one edge. */
 .navLinkActive {
   color: var(--text);
 }
 
-.navLinkActive::after {
-  content: "";
+/* One rule for the whole nav, not one per link: it has to travel between them,
+   and a marker that belongs to a link cannot leave it. Position and width are
+   set from JS (useSlingshotIndicator) — left stays 0 so the whole journey is a
+   transform. It sits on the header's own hairline rather than floating above
+   it, so the two rules read as one edge. */
+.navRule {
   position: absolute;
-  inset: auto 0 -1px 0;
+  left: 0;
+  bottom: -1px;
+  width: 0;
   height: 2px;
   background: var(--text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-fast) var(--ease);
 }
 
 .headerAction {
