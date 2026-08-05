@@ -7,6 +7,7 @@ import {
 } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../theme/ThemeProvider";
+import { useMagnetic } from "../lib/useMagnetic";
 import styles from "./Shell.module.css";
 
 const ROUTES = [
@@ -141,6 +142,7 @@ function useScrolledHeader() {
 
 function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | null> }) {
   const { navRef, ruleRef } = useSlingshotIndicator();
+  const actionRef = useMagnetic<HTMLAnchorElement>();
 
   return (
     <header className={styles.header} ref={headerRef}>
@@ -168,6 +170,7 @@ function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | nul
 
         <a
           className={styles.headerAction}
+          ref={actionRef}
           href={`mailto:${EMAIL}`}
           target="_blank"
           rel="noopener noreferrer"
@@ -186,6 +189,7 @@ function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | nul
  */
 function ArcadeInvite() {
   const { setTheme } = useTheme();
+  const actionRef = useMagnetic<HTMLButtonElement>();
 
   return (
     <div className={styles.invite}>
@@ -196,6 +200,7 @@ function ArcadeInvite() {
       <button
         type="button"
         className={styles.inviteAction}
+        ref={actionRef}
         onClick={() => setTheme("arcade")}
       >
         Play the arcade version

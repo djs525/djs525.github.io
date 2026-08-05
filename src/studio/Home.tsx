@@ -26,6 +26,7 @@ import { Link } from "react-router-dom";
 import { PROJECTS, type Project } from "../data/projects";
 import { ROUTE_META } from "../data/meta";
 import { usePageMeta } from "../lib/usePageMeta";
+import { useMagnetic } from "../lib/useMagnetic";
 import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
 import { GitHubIcon, LinkedInIcon } from "./Icons";
@@ -90,6 +91,8 @@ function ProjectRow({
 
 export default function Home() {
   usePageMeta(ROUTE_META.home);
+  const linkedInRef = useMagnetic<HTMLAnchorElement>();
+  const githubRef = useMagnetic<HTMLAnchorElement>();
 
   return (
     <Page>
@@ -129,6 +132,7 @@ export default function Home() {
               this one. */}
           <a
             className={styles.primary}
+            ref={linkedInRef}
             href={LINKEDIN}
             target="_blank"
             rel="noopener noreferrer"
@@ -138,6 +142,7 @@ export default function Home() {
           </a>
           <a
             className={styles.secondary}
+            ref={githubRef}
             href="https://github.com/djs525"
             target="_blank"
             rel="noopener noreferrer"

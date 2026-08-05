@@ -252,7 +252,7 @@ Rounded, small: 6px on tags and inline chips, 10px on rows and inputs, 16px on p
 ## Components
 
 ### Buttons
-- **Primary:** Text fill, Surface label, pill, 11px/20px, label type at 500. Hover does not change hue — it lifts 1px onto the Rest shadow. Active returns to 0.
+- **Primary:** Text fill, Surface label, pill, 11px/20px, label type at 500. Hover does not change hue — it lifts 1px onto the Rest shadow and leans up to 2px toward the pointer. Active returns to 0.
 - **Secondary:** Surface fill, 1px Line Strong, Text label, pill. Hover fills Surface 2.
 - **Quiet (link-style):** Text label with a 1px underline offset 3px in Line Strong; hover brings the underline to Text.
 
@@ -302,7 +302,9 @@ Rules that make it a signature rather than an intro effect:
 
 **The supporting motion**, everywhere below the fold: content **rises 12px and fades in as it enters the viewport**, once, 600ms, `cubic-bezier(.2,.7,.3,1)`, staggered 60ms across siblings in a group. Everything is fully visible by default and the effect is skipped entirely under `prefers-reduced-motion: reduce`.
 
-Interaction motion is 150ms on the same curve and limited to background fill, a 1px translate, and the arrow travel. There is no scroll-linked parallax, no scroll-jacking, and no second entrance style.
+Interaction motion is 150ms on the same curve and limited to background fill, a 1px translate, the 2px pill lean below, and the arrow travel. There is no scroll-linked parallax, no scroll-jacking, and no second entrance style.
+
+**The pill leans.** A pill-shaped action follows the pointer while the pointer is over it — nothing at the centre, two pixels at the very edge, released on the way out. Two pixels is the whole budget, and the lean is always *toward* the pointer, so a target only ever becomes easier to hit. It is written on the independent `translate` property (`src/lib/useMagnetic.ts`) so it composes with the 1px hover lift on `transform` rather than replacing it, and it is skipped entirely for coarse pointers and under `prefers-reduced-motion: reduce`. It belongs to pills only: a row, a plate, a tag, or a link that is a word does not lean.
 
 ## Theme switching
 
