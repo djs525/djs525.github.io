@@ -15,6 +15,118 @@
  * element there is a hand-authored pixel grid in `src/data/sprites.ts`.
  */
 
+/*
+ * The four interests on About, drawn to the same 16px/1.4px rule as everything
+ * else here. They are the one place on the site where a mark is allowed to be
+ * warm rather than functional — but they stay line drawings in currentColor,
+ * because a set of little coloured illustrations would outrank the work.
+ */
+
+export function ControllerIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect x="1.5" y="4.6" width="13" height="7.4" rx="2.8" />
+      <path d="M4.3 8.3h2.1M5.35 7.25v2.1" />
+      <path d="M10.3 9.1h.01M11.9 7.5h.01" />
+    </svg>
+  );
+}
+
+export function PokeballIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="8" cy="8" r="6.3" />
+      <path d="M1.7 8h4M10.3 8h4" />
+      <circle cx="8" cy="8" r="2.1" />
+    </svg>
+  );
+}
+
+export function CardsIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect
+        x="2.2"
+        y="3.4"
+        width="6.6"
+        height="9.2"
+        rx="1.4"
+        transform="rotate(-9 5.5 8)"
+      />
+      <rect
+        x="7.2"
+        y="3.4"
+        width="6.6"
+        height="9.2"
+        rx="1.4"
+        transform="rotate(9 10.5 8)"
+      />
+    </svg>
+  );
+}
+
+export function FlagIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M3.3 2.2v11.6" />
+      <path d="M3.3 3.4h9.4v5.8H3.3z" />
+      <path
+        d="M3.3 3.4h4.7v2.9H3.3zM8 6.3h4.7v2.9H8z"
+        fill="currentColor"
+        stroke="none"
+      />
+    </svg>
+  );
+}
+
 export function MailIcon() {
   return (
     <svg

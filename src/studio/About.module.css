@@ -49,9 +49,18 @@
     0 1px 0 0 var(--line);
 }
 
+/* The mark sits on the label's line rather than above the tile: it is a
+   qualifier on "Playing" or "Watching", not a badge for the tile. */
 .kind {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
   font-size: 0.8125rem;
   color: var(--text-3);
+}
+
+.kind svg {
+  flex: none;
 }
 
 .name {
