@@ -123,11 +123,25 @@ export default function Home() {
         {/* Email lives in the header, on every route. The hero spends its two
             slots on the places the work can be checked instead. */}
         <div className={styles.actions}>
-          <a className={styles.primary} href={LINKEDIN}>
+          {/* Both leave the site, so both open beside it: a recruiter who
+              lands on a GitHub profile should still have the write-ups one tab
+              away. rel="noopener" denies the opened page a handle back onto
+              this one. */}
+          <a
+            className={styles.primary}
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <LinkedInIcon />
             LinkedIn
           </a>
-          <a className={styles.secondary} href="https://github.com/djs525">
+          <a
+            className={styles.secondary}
+            href="https://github.com/djs525"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <GitHubIcon />
             GitHub
           </a>

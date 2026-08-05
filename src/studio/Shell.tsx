@@ -166,7 +166,12 @@ function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | nul
           <span className={styles.navRule} ref={ruleRef} aria-hidden="true" />
         </nav>
 
-        <a className={styles.headerAction} href={`mailto:${EMAIL}`}>
+        <a
+          className={styles.headerAction}
+          href={`mailto:${EMAIL}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Email me
         </a>
       </div>
@@ -206,10 +211,20 @@ function Footer() {
         <div className={styles.contact}>
           <h2 className={styles.contactLead}>Get in touch</h2>
           <div className={styles.contactLinks}>
-            <a className={styles.contactLink} href={`mailto:${EMAIL}`}>
+            <a
+              className={styles.contactLink}
+              href={`mailto:${EMAIL}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {EMAIL}
             </a>
-            <a className={styles.contactLink} href={GITHUB}>
+            <a
+              className={styles.contactLink}
+              href={GITHUB}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               github.com/djs525
             </a>
           </div>
