@@ -243,7 +243,13 @@
   gap: var(--s5);
 }
 
+/* Inline-flex so the outbound mark shares the link's line box and the
+   underline runs beneath both — an icon hanging past the rule would read as a
+   separate thing sitting next to the link. */
 .contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.9375rem;
   color: var(--text-2);
   text-decoration: none;
@@ -257,6 +263,18 @@
 .contactLink:hover {
   color: var(--text);
   border-bottom-color: var(--text);
+}
+
+/* Full ink, not a faded annotation: this mark is the only warning that the
+   link opens a tab, so it has to clear the non-text contrast floor at rest and
+   not only under the pointer. */
+.contactLink svg {
+  flex: none;
+  transition: translate var(--t-fast) var(--ease);
+}
+
+.contactLink:hover svg {
+  translate: 1px -1px;
 }
 
 /* --- The arcade invitation --------------------------------------------- */

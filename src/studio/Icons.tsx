@@ -16,6 +16,126 @@
  */
 
 /*
+ * The five rooms, as they appear on the dial. A room has to be recognisable
+ * before its name is read, so each one is the plainest possible sign for what
+ * is behind it — a stack, a case, a chain of command, a cup, a person — and
+ * none of them is clever.
+ */
+
+export function StackIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M8 1.9 14.3 5.5 8 9.1 1.7 5.5z" />
+      <path d="M2.6 8.4 8 11.5l5.4-3.1" />
+      <path d="M2.6 11.3 8 14.4l5.4-3.1" />
+    </svg>
+  );
+}
+
+export function CaseIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <rect x="1.7" y="4.6" width="12.6" height="9" rx="1.8" />
+      <path d="M5.8 4.6V3.5c0-.7.6-1.3 1.3-1.3h1.8c.7 0 1.3.6 1.3 1.3v1.1" />
+      <path d="M1.7 8.6h12.6" />
+    </svg>
+  );
+}
+
+export function HierarchyIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="8" cy="3.3" r="1.8" />
+      <circle cx="3.4" cy="12.5" r="1.8" />
+      <circle cx="12.6" cy="12.5" r="1.8" />
+      <path d="M8 5.1v2.3" />
+      <path d="M3.4 10.7V7.4h9.2v3.3" />
+    </svg>
+  );
+}
+
+export function TrophyIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M4.6 2.2h6.8v3.6a3.4 3.4 0 0 1-6.8 0z" />
+      <path d="M4.6 3.2H2.7v1.2a2.5 2.5 0 0 0 1.9 2.4" />
+      <path d="M11.4 3.2h1.9v1.2a2.5 2.5 0 0 1-1.9 2.4" />
+      <path d="M8 9.2v2.5" />
+      <path d="M5.5 13.8h5" />
+    </svg>
+  );
+}
+
+export function PersonIcon() {
+  return (
+    <svg
+      className="icon"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="8" cy="5.4" r="2.7" />
+      <path d="M2.9 13.8a5.3 5.3 0 0 1 10.2 0" />
+    </svg>
+  );
+}
+
+/*
  * The four interests on About, drawn to the same 16px/1.4px rule as everything
  * else here. They are the one place on the site where a mark is allowed to be
  * warm rather than functional — but they stay line drawings in currentColor,
@@ -144,6 +264,37 @@ export function MailIcon() {
     >
       <rect x="1.6" y="3.4" width="12.8" height="9.2" rx="1.6" />
       <path d="M2.4 4.6 8 8.9l5.6-4.3" />
+    </svg>
+  );
+}
+
+/**
+ * The mark on a link that leaves the site. Every outbound link here opens in a
+ * new tab, and a tab opening unannounced is a small surprise a reader has to
+ * recover from; this says so before the click instead of after it.
+ *
+ * Drawn rather than set as the ↗ character: a glyph inherits the text face's
+ * weight and optical size and lands differently in every context, where this
+ * carries the same 1.4px hairline as the rest of the icon set. Deliberately
+ * 12px rather than 16 — it annotates a link, it is not a button's icon.
+ */
+export function OutboundIcon() {
+  return (
+    <svg
+      className="icon"
+      width="12"
+      height="12"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M4.6 11.4 11.4 4.6" />
+      <path d="M5.9 4.6h5.5v5.5" />
     </svg>
   );
 }

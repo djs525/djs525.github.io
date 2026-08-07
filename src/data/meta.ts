@@ -11,6 +11,11 @@ export const ROUTE_META = {
     description:
       "I build products end to end: the interface you touch, the service behind it, the data underneath, and the model that decides. Four projects, each written up in full.",
   },
+  projects: {
+    title: "Projects",
+    description:
+      "Four projects built end to end — the interface, the service, the data, and the model — each written up in full.",
+  },
   experience: {
     title: "Experience",
     description:

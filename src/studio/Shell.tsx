@@ -8,10 +8,11 @@ import {
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../theme/ThemeProvider";
 import { useMagnetic } from "../lib/useMagnetic";
+import { OutboundIcon } from "./Icons";
 import styles from "./Shell.module.css";
 
 const ROUTES = [
-  { to: "/", label: "Projects" },
+  { to: "/projects", label: "Projects" },
   { to: "/experience", label: "Experience" },
   { to: "/leadership", label: "Leadership" },
   { to: "/achievements", label: "Achievements" },
@@ -152,12 +153,14 @@ function Header({ headerRef }: { readonly headerRef: RefObject<HTMLElement | nul
           <span className={styles.wordmarkRole}>Software · Data · Product</span>
         </Link>
 
+        {/* `end` on the index: a project write-up is not the index, so the
+            rule leaves the nav rather than sitting under "Projects". */}
         <nav className={styles.nav} aria-label="Sections" ref={navRef}>
           {ROUTES.map((route) => (
             <NavLink
               key={route.to}
               to={route.to}
-              end={route.to === "/"}
+              end={route.to === "/projects"}
               className={({ isActive }) =>
                 `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
               }
@@ -216,6 +219,8 @@ function Footer() {
         <div className={styles.contact}>
           <h2 className={styles.contactLead}>Get in touch</h2>
           <div className={styles.contactLinks}>
+            {/* An address is self-evidently a mail client, not a page — the
+                outbound mark is for links that open a tab of the web. */}
             <a
               className={styles.contactLink}
               href={`mailto:${EMAIL}`}
@@ -231,6 +236,7 @@ function Footer() {
               rel="noopener noreferrer"
             >
               github.com/djs525
+              <OutboundIcon />
             </a>
           </div>
         </div>

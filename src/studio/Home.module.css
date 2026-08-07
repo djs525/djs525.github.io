@@ -252,6 +252,9 @@
   position: relative;
   z-index: 1;
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   margin-top: var(--s2);
   font-family: var(--font-mono);
   font-size: 0.75rem;
@@ -278,6 +281,22 @@
 
 .rowLive:hover {
   border-bottom-color: var(--text);
+}
+
+/* Both of these leave the site and open a tab, and the mark is the only thing
+   that says so before the click — so it inherits the link's full ink rather
+   than being faded back. A meaningful graphic held at 45% opacity is a 2:1
+   graphic, and this one has to be read, not sensed. The lift on hover is what
+   gives it life instead. */
+.rowLive svg,
+.rowRepo svg {
+  flex: none;
+  transition: translate var(--t-fast) var(--ease);
+}
+
+.rowLive:hover svg,
+.rowRepo:hover svg {
+  translate: 1px -1px;
 }
 
 /* Wrapped, the vertical rules would land at the start of a line and read as

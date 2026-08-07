@@ -1,0 +1,316 @@
+/*
+ * The dial. Every length is a fraction of one custom property, so the whole
+ * arrangement scales as a single object and the ring can never come apart at
+ * an odd viewport.
+ *
+ * The four numbers that decide the whole arrangement are the disc, the petal,
+ * and the two orbits — where a petal rests under the disc, and where it comes
+ * to when it is reached for.
+ */
+
+.stage {
+  /* The names sit outside the ring, so the dial cannot have the viewport's
+     full width — two thirds of it leaves room for the longest name to clear
+     the edge on a phone without a sideways scrollbar. */
+  --dial: clamp(232px, min(66vw, 72vh), 600px);
+  /* The disc sets how long the plateau's edges are allowed to be: what shows
+     of a shape at the rim is the rim's radius times the sine of the angle the
+     gaps can spare. Growing these two together lengthens the edges and leaves
+     the spacing exactly where it was. */
+  --disc: calc(var(--dial) * 0.6);
+  --petal-w: calc(var(--dial) * 0.277);
+  /* The shape is drawn in a 160 × 70 box; the element has to keep that ratio
+     or the corners go oval. Wide and shallow is the shape's whole character —
+     it is stretched sideways, and only deep enough to have somewhere to hide. */
+  --petal-h: calc(var(--petal-w) * 70 / 160);
+  /* Centre of a plateau from the centre of the dial. At rest the inner corners
+     sit just inside the disc's radius — tucked, not floating — and a wide
+     shallow tab shows past the rim. Shrinking the disc moves both of these:
+     they are measured from its rim, not from the dial.
+     A reached-for room barely travels: it grows instead, and growth alone
+     carries its outer edge a third of the tab's own height further out. These
+     two numbers are a pair — this orbit is the furthest the shape can sit and
+     still have its inner corners under the disc once enlarged, which is what
+     keeps daylight from opening between the two. */
+  --orbit-rest: calc(var(--dial) * 0.3146);
+  --orbit-out: calc(var(--dial) * 0.3176);
+
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s7);
+  padding: var(--s7) var(--gutter);
+}
+
+.stage:focus {
+  outline: none;
+}
+
+.dial {
+  position: relative;
+  width: var(--dial);
+  height: var(--dial);
+}
+
+/* --- The name ----------------------------------------------------------- */
+
+.core {
+  /* Signature paints itself in var(--text); the disc is the one place on the
+     surface where that has to invert. */
+  --text: var(--surface);
+
+  position: absolute;
+  /* Centred by inset rather than by a translate: no transform of its own, so
+     nothing here can drift off the centre the rooms are placed around. */
+  inset: calc(50% - var(--disc) / 2);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 0 8%;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 18px 48px -24px rgba(27, 25, 23, 0.5);
+  /* The name is not a control and never answers a pointer: it holds still
+     while the rooms around it move. The cursor says so too. */
+  cursor: default;
+  animation: rise var(--t-slow) var(--ease) backwards;
+}
+
+/* Sized against the disc rather than the viewport — the element selector is
+   deliberate, since the signature owns its own size everywhere else. */
+.core h1 {
+  font-size: calc(var(--disc) * 0.26);
+  text-align: center;
+}
+
+/* --- The rooms ---------------------------------------------------------- */
+
+.spokes {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.spoke {
+  /* The three numbers a hover changes. Everything else follows from them. */
+  --orbit-now: var(--orbit-rest);
+  --lift: 1;
+  --word: 0;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--petal-w);
+  height: var(--petal-h);
+  text-decoration: none;
+  border-radius: var(--r-lg);
+  /*
+   * A link's box is a rectangle, and five rectangles this size on a ring
+   * overlap each other badly — a pointer travelling through the gap between
+   * two rooms sits inside both boxes at once, and the hover flickers between
+   * them. Nothing here is a hit target except the drawn shape below, which
+   * hit-tests against its own outline. Hover still reaches this element: it
+   * applies to every ancestor of whatever was hit.
+   */
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--angle))
+    translateY(calc(-1 * var(--orbit-now))) scale(var(--lift));
+  transition: transform var(--t-mid) var(--ease);
+  animation: petal var(--t-slow) var(--ease) backwards;
+  animation-delay: calc(var(--i) * 70ms);
+}
+
+/*
+ * One move, not two. The shape used to slide outward, which pulled it off the
+ * disc and left a crescent of ground behind it — the reached-for room looked
+ * detached from the name. Now it enlarges in place, evenly: half again its own
+ * size, about its own middle, so it grows outward and inward at once. The
+ * outer edge advances 35px, the inner edge stays under the disc, and there is
+ * never a seam between the two.
+ */
+.spoke:hover,
+.spoke:focus-visible {
+  --orbit-now: var(--orbit-out);
+  --lift: 1.5;
+  --word: 1;
+  /* The one that came out passes over its neighbours, never under them. */
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* The one hit target. An `svg` box does not catch pointers where nothing is
+     painted, so this is the filled outline and nothing else — including the
+     ink the shape turns while it is being read, which is the same path. */
+  pointer-events: auto;
+  fill: var(--surface);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  /* The path is drawn in the box's units and scaled to the element; the rim
+     must not thicken with it. */
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 2px 3px rgba(27, 25, 23, 0.07));
+  transition:
+    fill var(--t-mid) var(--ease),
+    stroke var(--t-mid) var(--ease),
+    filter var(--t-mid) var(--ease);
+}
+
+/* Ink is the arrival state, not a tint of one: the chosen room becomes the
+   same mass as the name at the centre. */
+.spoke:hover .petal,
+.spoke:focus-visible .petal {
+  fill: var(--ink);
+  stroke: var(--ink);
+  filter: drop-shadow(0 12px 26px rgba(27, 25, 23, 0.2));
+}
+
+/* --- The mark ------------------------------------------------------------ */
+
+/*
+ * Held near the outer edge — that band is the only part of the plateau the
+ * disc is not covering while it is tucked, and a room has to be legible before
+ * anything moves.
+ */
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 13%;
+  /* The mark rides on the shape; it must never become a second hit region with
+     gaps between its strokes. */
+  pointer-events: none;
+}
+
+.face > svg {
+  width: clamp(18px, calc(var(--dial) * 0.042), 25px);
+  height: clamp(18px, calc(var(--dial) * 0.042), 25px);
+  color: var(--text-2);
+  /* The ring turns; the marks do not. */
+  rotate: calc(-1 * var(--angle));
+  transition: color var(--t-mid) var(--ease);
+}
+
+.spoke:hover .face > svg,
+.spoke:focus-visible .face > svg {
+  color: var(--surface);
+}
+
+/* --- The name ------------------------------------------------------------ */
+
+/*
+ * Parked just beyond the outer edge, on the plateau's own radial axis — then
+ * pushed off it, outward, by half its own box.
+ *
+ * The push is the whole trick. A name is set level whatever angle its room
+ * sits at, so a name on the left or right of the dial would otherwise run back
+ * across the plateau it belongs to, and the plateau is ink while it is being
+ * read. Half the box plus a few pixels puts the near end of the name at the
+ * point on the axis rather than across it, at every one of the five angles.
+ */
+.word {
+  position: absolute;
+  /* A percentage of a shallow box is a small number, so this is set against
+     the shape's own height and stays proportional to it. */
+  bottom: calc(100% + 14%);
+  left: 50%;
+  width: 240%;
+  margin-left: -120%;
+  text-align: center;
+  white-space: nowrap;
+  rotate: calc(-1 * var(--angle));
+  font-size: clamp(0.625rem, calc(var(--dial) * 0.023), 0.75rem);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: var(--word);
+  /* It appears on hover and sits over open ground; catching the pointer there
+     would keep a room lit while nothing of it is under the cursor. */
+  pointer-events: none;
+  transition: opacity var(--t-mid) var(--ease);
+}
+
+/* Inside the levelled slot, x and y are the screen's own axes again — which is
+   what makes a single vector work for all five rooms. */
+.wordText {
+  display: inline-block;
+  translate: calc(var(--nx) * (50% + 5px)) calc(var(--ny) * (50% + 5px));
+  /* The name rides on a shape that grows by half, but it is set on the ground
+     rather than on the ink — it keeps the surface's type scale and lets the
+     shape do the growing. */
+  scale: calc(1 / var(--lift));
+}
+
+/* --- Beneath -------------------------------------------------------------- */
+
+.footnote {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  animation: rise var(--t-slow) var(--ease) 420ms backwards;
+}
+
+/* --- Arrival -------------------------------------------------------------- */
+
+@keyframes rise {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+ * The petals are pushed out of the disc rather than faded in place: the same
+ * placement transform, started deeper under it. Clockwise, one after another,
+ * because a ring that arrives all at once has no direction.
+ */
+@keyframes petal {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--angle))
+      translateY(calc(-1 * var(--orbit-rest) * 0.5)) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--angle))
+      translateY(calc(-1 * var(--orbit-now))) scale(var(--lift));
+  }
+}
+
+/*
+ * A finger has no hover, so nothing would ever come out from under the disc.
+ * Touch gets the revealed arrangement outright.
+ */
+@media (hover: none) {
+  .spoke {
+    --orbit-now: var(--orbit-out);
+    --word: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .core,
+  .spoke,
+  .footnote {
+    animation: none;
+  }
+
+  .spoke,
+  .petal,
+  .face > svg,
+  .word {
+    transition: none;
+  }
+}

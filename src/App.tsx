@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
 import { useTheme } from "./theme/ThemeProvider";
 
 import { Arena } from "./components/Arena";
@@ -12,6 +12,7 @@ import ArcadeAchievements from "./pages/Achievements";
 import ArcadeAbout from "./pages/About";
 
 import { Shell } from "./studio/Shell";
+import StudioLanding from "./studio/Landing";
 import StudioHome from "./studio/Home";
 import StudioExperience from "./studio/Experience";
 import StudioProjectDetail from "./studio/ProjectDetail";
@@ -40,11 +41,22 @@ function ScrollToTop() {
  * than passing a theme down, so nothing in the studio world can reach an
  * arcade module by accident. See DESIGN.md → Theme switching.
  */
-function StudioApp() {
+/** Every studio route except the landing, which owns the whole viewport. */
+function StudioShell() {
   return (
     <Shell>
-      <Routes>
-        <Route path="/" element={<StudioHome />} />
+      <Outlet />
+    </Shell>
+  );
+}
+
+function StudioApp() {
+  return (
+    <Routes>
+      {/* The dial is the door: no header, no footer, nothing to scroll past. */}
+      <Route path="/" element={<StudioLanding />} />
+      <Route element={<StudioShell />}>
+        <Route path="/projects" element={<StudioHome />} />
         <Route path="/experience" element={<StudioExperience />} />
         <Route path="/projects/:slug" element={<StudioProjectDetail />} />
         <Route path="/leadership" element={<StudioLeadership />} />
@@ -52,8 +64,8 @@ function StudioApp() {
         <Route path="/about" element={<StudioAbout />} />
         {/* Any unknown path lands on the index rather than a dead end. */}
         <Route path="*" element={<StudioHome />} />
-      </Routes>
-    </Shell>
+      </Route>
+    </Routes>
   );
 }
 
@@ -64,6 +76,9 @@ function ArcadeApp() {
       <Nav />
       <Routes>
         <Route path="/" element={<ArcadeHome />} />
+        {/* The studio dial sends "Projects" here; the arcade calls the same
+            screen the roster, and a theme switch must not drop the visitor. */}
+        <Route path="/projects" element={<ArcadeHome />} />
         <Route path="/experience" element={<ArcadeExperience />} />
         <Route path="/projects/:slug" element={<ArcadeProjectDetail />} />
         <Route path="/leadership" element={<ArcadeLeadership />} />

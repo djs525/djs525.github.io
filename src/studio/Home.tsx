@@ -29,7 +29,7 @@ import { usePageMeta } from "../lib/usePageMeta";
 import { useMagnetic } from "../lib/useMagnetic";
 import { Page } from "./Shell";
 import { Reveal } from "./Reveal";
-import { GitHubIcon, LinkedInIcon } from "./Icons";
+import { GitHubIcon, LinkedInIcon, OutboundIcon } from "./Icons";
 import { Signature } from "./Signature";
 import { SectionHeading, Tags } from "./Parts";
 import styles from "./Home.module.css";
@@ -73,15 +73,24 @@ function ProjectRow({
           {/* A working deployment outranks the source, so it sits above it and
               carries full ink where the repository path stays muted. */}
           {project.liveUrl ? (
-            <a className={styles.rowLive} href={project.liveUrl}>
+            <a
+              className={styles.rowLive}
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {new URL(project.liveUrl).host}
+              <OutboundIcon />
             </a>
           ) : null}
           <a
             className={styles.rowRepo}
             href={`https://github.com/${project.repo}`}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {project.repo}
+            <OutboundIcon />
           </a>
         </div>
       </article>
@@ -90,7 +99,7 @@ function ProjectRow({
 }
 
 export default function Home() {
-  usePageMeta(ROUTE_META.home);
+  usePageMeta(ROUTE_META.projects);
   const linkedInRef = useMagnetic<HTMLAnchorElement>();
   const githubRef = useMagnetic<HTMLAnchorElement>();
 
